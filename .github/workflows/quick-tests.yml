@@ -1,0 +1,45 @@
+# 🧪 Tests rapides à chaque commit
+name: 🧪 Quick Tests
+
+# Déclencher sur TOUS les commits (même branches de feature)
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  quick-tests:
+    name: ⚡ Tests Rapides
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout
+      uses: actions/checkout@v4
+      
+    # 🐍 Python check basique
+    - name: 🐍 Python Syntax Check
+      run: |
+        python -m py_compile backend/app.py
+        echo "✅ Backend Python syntax OK"
+        
+    # ⚛️ Node.js check basique  
+    - name: ⚛️ Node.js Syntax Check
+      run: |
+        cd frontend
+        npm install --package-lock-only
+        echo "✅ Frontend package.json OK"
+        
+    # 🐳 Docker syntax check
+    - name: 🐳 Docker Compose Check
+      run: |
+        docker-compose config
+        echo "✅ Docker configuration OK"
+        
+    # 📊 Code Statistics
+    - name: 📊 Code Stats
+      run: |
+        echo "📈 Statistiques du projet :"
+        echo "🐍 Lignes Python: $(find backend -name '*.py' -type f -exec wc -l {} + | tail -1 | awk '{print $1}')"
+        echo "⚛️ Lignes JavaScript: $(find frontend/src -name '*.js' -type f -exec wc -l {} + | tail -1 | awk '{print $1}' || echo 0)" 
+        echo "📁 Fichiers totaux: $(find . -type f | wc -l)"

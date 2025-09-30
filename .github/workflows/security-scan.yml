@@ -1,0 +1,127 @@
+# 🔒 Security Scan Workflow
+# Analyse de sécurité automatique
+
+name: Security Scan
+
+# 🎯 Se déclenche chaque semaine et sur les PR importantes
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Tous les lundis à minuit
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+# 🔧 Jobs de sécurité
+jobs:
+  # ===============================
+  # 🔒 SCAN DÉPENDANCES BACKEND
+  # ===============================
+  backend-security:
+    name: 🐍 Backend Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🐍 Setup Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 🔒 Install security tools
+      run: |
+        pip install safety bandit pip-audit
+
+    - name: 🔍 Scan for vulnerable dependencies
+      run: |
+        cd backend
+        safety check -r requirements.txt
+
+    - name: 🕵️ Static security analysis
+      run: |
+        cd backend
+        bandit -r . -f json -o bandit-report.json || true
+
+    - name: 📋 Upload security report
+      uses: actions/upload-artifact@v3
+      with:
+        name: backend-security-report
+        path: backend/bandit-report.json
+
+  # ===============================
+  # 🔒 SCAN DÉPENDANCES FRONTEND
+  # ===============================
+  frontend-security:
+    name: ⚛️ Frontend Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 📦 Setup Node.js 18
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: 🔍 NPM Security Audit
+      run: |
+        cd frontend
+        npm audit --audit-level=moderate
+
+    - name: 🔒 Check for known vulnerabilities
+      run: |
+        cd frontend
+        npx audit-ci --moderate
+
+  # ===============================
+  # 🕵️ ANALYSE SECRETS
+  # ===============================
+  secrets-scan:
+    name: 🕵️ Secrets Detection
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔍 Scan for secrets
+      run: |
+        echo "🔍 Recherche de secrets dans le code..."
+        # Recherche de patterns dangereux
+        if grep -r "password.*=" . --exclude-dir=.git --exclude-dir=node_modules || \
+           grep -r "secret.*=" . --exclude-dir=.git --exclude-dir=node_modules || \
+           grep -r "api_key.*=" . --exclude-dir=.git --exclude-dir=node_modules; then
+          echo "⚠️ Attention: Possibles secrets détectés dans le code!"
+          echo "🔒 Vérifiez que tous les secrets utilisent des variables d'environnement"
+        else
+          echo "✅ Aucun secret détecté dans le code"
+        fi
+
+  # ===============================
+  # 🛡️ ANALYSE DOCKERFILE
+  # ===============================
+  docker-security:
+    name: 🐳 Docker Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔍 Scan Dockerfile security
+      run: |
+        echo "🔍 Vérification des Dockerfiles..."
+        
+        # Vérifier qu'on n'utilise pas root
+        if grep -q "USER root" backend/Dockerfile frontend/Dockerfile; then
+          echo "⚠️ Warning: Usage de USER root détecté"
+        fi
+        
+        # Vérifier les images de base
+        echo "📋 Images utilisées:"
+        grep "FROM" backend/Dockerfile frontend/Dockerfile
+        
+        echo "✅ Scan Docker terminé"

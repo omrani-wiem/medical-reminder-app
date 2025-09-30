@@ -1,44 +1,60 @@
-version: "3"
+version: "3.8"
 
 services:
+  # Base de données MongoDB
+  mongo:
+    image: mongo:6
+    container_name: medical_reminder_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=medical_reminder
+    networks:
+      - medical_network
+
+  # Backend Python Flask
   backend:
     build: ./backend
-    ports:
-      - "5000:5000"
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-
-#la partie qui concerne la base de données
-
-services:
-  backend:
-    build: ./backend
-    container_name: backend
+    container_name: medical_reminder_backend
     ports:
       - "5000:5000"
     depends_on:
       - mongo
     environment:
       - MONGO_URI=mongodb://mongo:27017/medical_reminder
+      - JWT_SECRET_KEY=votre-secret-key-super-securise
+      - EMAIL_PASSWORD=your-app-password
+      - EMAIL_USER=omraniwiem62@gmail.com
+    networks:
+      - medical_network
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
 
+  # Frontend React
   frontend:
     build: ./frontend
-    container_name: frontend
+    container_name: medical_reminder_frontend
     ports:
       - "3000:3000"
     depends_on:
       - backend
-
-  mongo:
-    image: mongo:6
-    container_name: mongo
-    ports:
-      - "27017:27017"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    networks:
+      - medical_network
     volumes:
-      - mongo_data:/data/db
+      - ./frontend:/app
+      - /app/node_modules
+    restart: unless-stopped
 
+# Volumes pour persistance des données
 volumes:
   mongo_data:
+
+# Réseau isolé pour l'application
+networks:
+  medical_network:
+    driver: bridge
