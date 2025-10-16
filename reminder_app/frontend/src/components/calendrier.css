@@ -1,0 +1,587 @@
+.calendrier {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Header */
+.calendrier-header {
+  margin-bottom: 30px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header-top h1 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.view-selector {
+  display: flex;
+  gap: 5px;
+  background: #f8f9fa;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.view-btn {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #7f8c8d;
+  transition: all 0.3s ease;
+}
+
+.view-btn.active {
+  background: white;
+  color: #3498db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.view-btn:hover:not(.active) {
+  background: #e9ecef;
+  color: #495057;
+}
+
+/* Navigation */
+.calendrier-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.nav-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: #2980b9;
+  transform: scale(1.1);
+}
+
+.current-period {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Vue Jour */
+.day-view {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.day-header {
+  padding: 25px 30px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.day-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.day-schedule {
+  padding: 30px;
+}
+
+.medication-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: #f8f9fb;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border-left: 4px solid #3498db;
+  transition: all 0.3s ease;
+}
+
+.medication-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.medication-item.taken {
+  background: rgba(39, 174, 96, 0.1);
+  border-left-color: #27ae60;
+}
+
+.medication-item.pending {
+  background: rgba(52, 152, 219, 0.1);
+  border-left-color: #3498db;
+}
+
+.medication-time {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  min-width: 80px;
+}
+
+.medication-info {
+  flex: 1;
+}
+
+.medication-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.medication-status {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.medication-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-toggle {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-take {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-take:hover {
+  background: #229954;
+  transform: translateY(-2px);
+}
+
+.btn-untake {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-untake:hover {
+  background: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+/* Vue Semaine */
+.week-view {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: #e1e5e9;
+}
+
+.week-day {
+  background: white;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.week-day.today {
+  background: rgba(52, 152, 219, 0.05);
+}
+
+.week-day-header {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #e1e5e9;
+  background: #f8f9fb;
+}
+
+.day-name {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.day-number {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-top: 5px;
+}
+
+.week-day.today .day-number {
+  color: #3498db;
+}
+
+.week-day-medications {
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.week-medication {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border-left: 3px solid #3498db;
+  font-size: 0.8rem;
+  background: #f8f9fb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.week-medication:hover {
+  transform: translateX(3px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.week-medication.taken {
+  background: rgba(39, 174, 96, 0.1);
+  border-left-color: #27ae60;
+}
+
+.week-med-time {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.week-med-name {
+  color: #7f8c8d;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Vue Mois */
+.month-view {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.month-header {
+  background: #f8f9fb;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: #e1e5e9;
+}
+
+.weekday {
+  padding: 15px;
+  text-align: center;
+  font-weight: 600;
+  color: #7f8c8d;
+  background: #f8f9fb;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: #e1e5e9;
+}
+
+.month-day {
+  background: white;
+  min-height: 120px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.month-day:hover {
+  background: #f8f9fb;
+  transform: scale(1.02);
+}
+
+.month-day.other-month {
+  background: #f8f9fb;
+  opacity: 0.5;
+}
+
+.month-day.today {
+  background: rgba(52, 152, 219, 0.1);
+  border: 2px solid #3498db;
+}
+
+.month-day-number {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.month-day.today .month-day-number {
+  color: #3498db;
+}
+
+.month-day-medications {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.month-medication {
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.month-medication.taken {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.month-medication.more {
+  background: #95a5a6;
+  text-align: center;
+  justify-content: center;
+}
+
+.month-med-time {
+  font-size: 0.6rem;
+}
+
+/* Aucun médicament */
+.no-medications {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7f8c8d;
+}
+
+.no-medications-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.no-medications p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Légende */
+.calendrier-legend {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.calendrier-legend h4 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.legend-items {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.legend-color.taken {
+  background: #27ae60;
+}
+
+.legend-color.pending {
+  background: #3498db;
+}
+
+.legend-color.missed {
+  background: #e74c3c;
+}
+
+.legend-item span {
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Résumé du jour */
+.day-summary {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.day-summary h4 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.summary-stat {
+  text-align: center;
+}
+
+.summary-stat .stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3498db;
+  margin-bottom: 5px;
+}
+
+.summary-stat .stat-label {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-top {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .view-selector {
+    justify-content: center;
+  }
+
+  .calendrier-navigation {
+    padding: 15px;
+  }
+
+  .current-period {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .week-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .week-day {
+    min-height: auto;
+  }
+
+  .week-day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .month-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .month-day {
+    min-height: 80px;
+    padding: 5px;
+  }
+
+  .month-day-number {
+    font-size: 0.9rem;
+  }
+
+  .month-medication {
+    font-size: 0.6rem;
+    padding: 2px 4px;
+  }
+
+  .legend-items {
+    justify-content: center;
+  }
+
+  .summary-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .medication-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .medication-time {
+    min-width: auto;
+  }
+
+  .medication-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
