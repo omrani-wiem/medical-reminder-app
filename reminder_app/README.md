@@ -343,4 +343,4 @@ Ce projet est à usage éducatif.
 
 Merci d'utiliser Medical Reminder ! 🏥💊
 
-Pour toute question : rochdifridhi39@gmail.com
+Pour toute question : omraniwiem62@gmail.com

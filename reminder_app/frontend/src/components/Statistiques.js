@@ -23,12 +23,12 @@ import { Chart as ChartJS, ArcElement, Tooltip as ChartTooltip, Legend as ChartL
 import { Doughnut, Bar as ChartBar, Line as ChartLine } from 'react-chartjs-2';
 import './Statistiques.css';
 
-// Configuration globale pour Chart.js
+
 ChartJS.defaults.font.family = "'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif";
 ChartJS.defaults.font.size = 12;
 ChartJS.defaults.color = '#6c757d';
 
-// Enregistrement des composants Chart.js
+
 ChartJS.register(
   ArcElement,
   ChartTooltip,
@@ -49,7 +49,7 @@ const Statistiques = () => {
   const [medicaments, setMedicaments] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Récupérer les médicaments depuis le backend
+  
   useEffect(() => {
     fetchMedicaments();
   }, []);
@@ -73,7 +73,7 @@ const Statistiques = () => {
     }
   };
 
-  // Générer les données d'adhérence à partir des médicaments RÉELLES
+
   const generateDonneesAdherence = () => {
     if (medicaments.length === 0) return [];
     
@@ -81,32 +81,32 @@ const Statistiques = () => {
     const aujourdhui = new Date();
     
     return jours.map((jour, index) => {
-      // Calculer la date pour ce jour de la semaine
-      const jourSemaine = aujourdhui.getDay(); // 0 = dimanche
+    
+      const jourSemaine = aujourdhui.getDay();
       const joursDepuisLundi = jourSemaine === 0 ? 6 : jourSemaine - 1;
       const dateJour = new Date(aujourdhui);
       dateJour.setDate(aujourdhui.getDate() - joursDepuisLundi + index);
       
-      // Calculer le total de prises attendues pour ce jour
+    
       let prisesAttenduesTotales = 0;
       medicaments.forEach(med => {
         const dateDebut = new Date(med.dateDebut);
         const dateFin = med.dateFin ? new Date(med.dateFin) : null;
         
-        // Vérifier si le médicament est actif ce jour
+        
         if (dateJour >= dateDebut && (!dateFin || dateJour <= dateFin)) {
           const frequence = parseInt(med.frequence) || 1;
           prisesAttenduesTotales += frequence;
         }
       });
       
-      // Calculer l'adhérence (taux réaliste basé sur le nombre de médicaments)
+      // Calcul du taux de base
       const tauxBase = medicaments.length === 1 ? 0.95 : 
                        medicaments.length === 2 ? 0.92 :
                        medicaments.length === 3 ? 0.88 : 0.85;
       
-      // Variation par jour (pour avoir des données différentes chaque jour)
-      const variationJour = ((index * 7) % 10 - 5) / 100; // -5% à +4%
+      
+      const variationJour = ((index * 7) % 10 - 5) / 100; 
       const tauxAdherence = Math.max(0.75, Math.min(1.0, tauxBase + variationJour));
       
       const prises = Math.round(prisesAttenduesTotales * tauxAdherence);
@@ -117,7 +117,7 @@ const Statistiques = () => {
     });
   };
 
-  // Générer les données temporelles mensuelles RÉELLES (10 derniers mois)
+  
   const generateDonneesTemporelles = () => {
     if (medicaments.length === 0) return [];
     
@@ -125,11 +125,11 @@ const Statistiques = () => {
     const aujourdhui = new Date();
     
     return mois.map((mois, index) => {
-      // Calculer le nombre de médicaments actifs ce mois (simulation progressive)
-      const progression = index / mois.length; // 0 à 1
+      
+      const progression = index / mois.length; 
       const nbMedicamentsActifs = Math.max(1, Math.round(medicaments.length * progression));
       
-      // Calculer les prises par mois
+      
       const joursParMois = 30;
       let prisesAttenduesTotales = 0;
       
@@ -138,7 +138,7 @@ const Statistiques = () => {
         prisesAttenduesTotales += frequence * joursParMois;
       });
       
-      // Taux d'adhérence qui s'améliore avec le temps
+      
       const tauxBase = 0.75 + (progression * 0.15); // 75% à 90%
       const variation = ((index * 3) % 10 - 5) / 100;
       const tauxAdherence = Math.max(0.70, Math.min(0.95, tauxBase + variation));
@@ -151,7 +151,7 @@ const Statistiques = () => {
     });
   };
 
-  // Générer la répartition des prises RÉELLE (30 derniers jours)
+  
   const generateDonneesRepartition = () => {
     if (medicaments.length === 0) {
       return [
@@ -161,7 +161,7 @@ const Statistiques = () => {
       ];
     }
     
-    // Calculer le total de prises attendues sur 30 jours
+  
     const joursAnalyse = 30;
     let totalDoses = 0;
     
@@ -170,7 +170,7 @@ const Statistiques = () => {
       const aujourdhui = new Date();
       const dateFin = med.dateFin ? new Date(med.dateFin) : null;
       
-      // Compter combien de jours le médicament était actif dans les 30 derniers jours
+      
       let joursActifs = 0;
       for (let i = 0; i < joursAnalyse; i++) {
         const dateJour = new Date(aujourdhui);
@@ -185,12 +185,12 @@ const Statistiques = () => {
       totalDoses += joursActifs * frequence;
     });
     
-    // Calculer la répartition réaliste
+    
     const tauxReussi = medicaments.length === 1 ? 0.92 : 
                        medicaments.length === 2 ? 0.88 :
                        medicaments.length === 3 ? 0.85 : 0.82;
     
-    const tauxRetard = 0.07; // 7% en retard
+    const tauxRetard = 0.07;
     const tauxManque = 1 - tauxReussi - tauxRetard;
     
     const reussies = Math.round(totalDoses * tauxReussi);
@@ -204,7 +204,7 @@ const Statistiques = () => {
     ];
   };
 
-  // Générer les statistiques par médicament RÉELLES
+  
   const generateDonneesMedicaments = () => {
     if (medicaments.length === 0) return [];
     
@@ -213,7 +213,7 @@ const Statistiques = () => {
       const aujourdhui = new Date();
       const dateFin = med.dateFin ? new Date(med.dateFin) : null;
       
-      // Calculer le nombre de jours actifs dans les 30 derniers jours
+      
       let joursActifs = 0;
       for (let i = 0; i < 30; i++) {
         const dateJour = new Date(aujourdhui);
@@ -227,8 +227,8 @@ const Statistiques = () => {
       const frequence = parseInt(med.frequence) || 1;
       const prisesParMois = joursActifs * frequence;
       
-      // Taux d'adhérence par médicament (varie selon la position)
-      const tauxBase = 0.85 + (index * 0.03); // Premier médicament = 85%, puis +3% par médicament
+      
+      const tauxBase = 0.85 + (index * 0.03); 
       const variation = ((med.nom.length % 10) - 5) / 100;
       const tauxAdherence = Math.max(0.75, Math.min(0.98, tauxBase + variation));
       
@@ -245,25 +245,25 @@ const Statistiques = () => {
     });
   };
 
-  // Générer les statistiques par heure basées sur les heures de prise des médicaments
+  
   const generateDonneesHeures = () => {
     const heuresStandard = ['06h', '08h', '12h', '14h', '18h', '20h', '22h'];
     
     return heuresStandard.map(heure => {
-      // Vérifier combien de médicaments ont cette heure de prise
+      
       const nbMedsACetteHeure = medicaments.filter(med => {
         if (med.heure) {
           const heureInt = parseInt(heure);
           const medHeureInt = parseInt(med.heure.split(':')[0]);
-          // Tolérance de ±1h
+          
           return Math.abs(heureInt - medHeureInt) <= 1;
         }
         return false;
       }).length;
       
-      // Base de prises: si des médicaments à cette heure, beaucoup de prises, sinon peu
+      
       const basePrises = nbMedsACetteHeure > 0 ? 80 + (nbMedsACetteHeure * 20) : 10;
-      const variation = (parseInt(heure) % 7) * 5; // Variation basée sur l'heure
+      const variation = (parseInt(heure) % 7) * 5; 
       const prises = basePrises + variation;
       
       return {

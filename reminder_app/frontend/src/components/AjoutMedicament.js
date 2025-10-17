@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AjoutMedicament.css';
 
-function AjoutMedicament=() => {
+function AjoutMedicament() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         nom: '',

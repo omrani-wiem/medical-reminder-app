@@ -8,7 +8,8 @@ function Login({ onLogin }) {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
-  });const [error, setError] = useState('');
+  });
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showLangDropdown, setShowLangDropdown] = useState(false);///contorle l'affichage du menu deroulant de langue
@@ -59,7 +60,6 @@ function Login({ onLogin }) {
 
       if (response.ok) {
         // Connexion réussie
-  return (
         localStorage.setItem('token', data.token);// on stocke le token et les infos de l'utilisateur dans le stockage local du navigateur.
         localStorage.setItem('user', JSON.stringify(data.user));
         onLogin();

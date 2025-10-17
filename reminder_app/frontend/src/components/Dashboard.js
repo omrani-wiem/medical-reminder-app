@@ -60,7 +60,7 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
         </div>
         <nav className="sidebar-nav">
             <ul className="nav-list">
-                {menuItems.map(item) => (
+                {menuItems.map((item) => (
                     <li key={item.id} className="nav-item">
                         <button
                             className={`nav-link ${activeTab === item.id ? 'active' : ''}`}

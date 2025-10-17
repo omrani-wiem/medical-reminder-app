@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -41,14 +41,53 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={
-              isAuthenticated ?
-               <Navigate to
+              isAuthenticated ? 
+                <Navigate to="/dashboard" replace /> : 
+                <Login onLogin={handleLogin} />
             }
-          <Route exact path="/" component={Home} />
-
-
+          />
+          <Route
+            path="/register"
+            element={
+              isAuthenticated ? 
+                <Navigate to="/dashboard" replace /> : 
+                <Register />
+            }
+          />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? 
+                <Dashboard user={currentUser} onLogout={handleLogout} /> : 
+                <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/accueil"
+            element={
+              isAuthenticated ? 
+                <AccueilDashboard user={currentUser} /> : 
+                <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/ajout-medicament"
+            element={
+              isAuthenticated ? 
+                <AjoutMedicament /> : 
+                <Navigate to="/login" replace />
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
+
+export default App;
