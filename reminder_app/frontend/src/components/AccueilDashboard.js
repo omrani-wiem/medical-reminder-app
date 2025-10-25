@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import './AcceuilDashboard.css';
+import './AccueilDashboard.css';
 
 // Fonction pour calculer les statistiques d'adhérence cette semaine
 const calculerStatistiquesAdherence = (medicaments) => {

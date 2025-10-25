@@ -9,7 +9,7 @@ const Parametres = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
-    // Données du profil - chargées depuis localStorage
+    
     nom: '',
     prenom: '',
     email: '',
@@ -127,12 +127,12 @@ const Parametres = () => {
   };
 
   const sections = [
-    { id: 'profil', icon: '👤', label: t('settings.profile') },
-    { id: 'preferences', icon: '🎨', label: t('settings.preferences') },
-    { id: 'notifications', icon: '🔔', label: t('settings.notifications') },
-    { id: 'securite', icon: '🔒', label: t('settings.security') },
-    { id: 'medical', icon: '🏥', label: t('settings.medical') },
-    { id: 'donnees', icon: '💾', label: t('settings.dataManagement') }
+    { id: 'profil', label: t('settings.profile') },
+    { id: 'preferences', label: t('settings.preferences') },
+    { id: 'notifications', label: t('settings.notifications') },
+    { id: 'securite', label: t('settings.security') },
+    { id: 'medical', label: t('settings.medical') },
+    { id: 'donnees', label: t('settings.dataManagement') }
   ];
 
   if (loading) {
@@ -146,11 +146,6 @@ const Parametres = () => {
 
   return (
     <div className="parametres">
-      <div className="parametres-header">
-        <h1>{t('settings.title')} ⚙️</h1>
-        <p>{t('settings.subtitle')}</p>
-      </div>
-
       <div className="parametres-container">
         {/* Menu de navigation */}
         <nav className="parametres-nav">
@@ -160,7 +155,6 @@ const Parametres = () => {
               className={`nav-item ${activeSection === section.id ? 'active' : ''}`}
               onClick={() => setActiveSection(section.id)}
             >
-              <span className="nav-icon">{section.icon}</span>
               <span className="nav-label">{section.label}</span>
             </button>
           ))}
@@ -173,7 +167,6 @@ const Parametres = () => {
             {/* Section Profil Personnel */}
             {activeSection === 'profil' && (
               <div className="settings-section">
-                <h2>👤 {t('settings.profile')}</h2>
                 <div className="form-grid">
                   <div className="form-group">
                     <label>{t('settings.firstName')}</label>
@@ -236,11 +229,9 @@ const Parametres = () => {
             {/* Section Préférences */}
             {activeSection === 'preferences' && (
               <div className="settings-section">
-                <h2>🎨 {t('settings.preferences')}</h2>
-                
                 {/* Sélecteur de langue */}
                 <div className="language-section">
-                  <h3>🌍 {t('settings.languageTitle')}</h3>
+                  <h3>{t('settings.languageTitle')}</h3>
                   <LanguageSwitcher />
                 </div>
 
@@ -276,20 +267,7 @@ const Parametres = () => {
             {/* Section Notifications */}
             {activeSection === 'notifications' && (
               <div className="settings-section">
-                <h2>🔔 {t('settings.notifications')}</h2>
                 <div className="form-grid">
-                  <div className="form-group checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        name="notifPush"
-                        checked={formData.notifPush}
-                        onChange={handleInputChange}
-                      />
-                      <span className="checkmark"></span>
-                      {t('settings.pushNotif')}
-                    </label>
-                  </div>
                   <div className="form-group checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -334,7 +312,6 @@ const Parametres = () => {
             {/* Section Sécurité */}
             {activeSection === 'securite' && (
               <div className="settings-section">
-                <h2>🔒 {t('settings.security')}</h2>
                 <div className="form-grid">
                   <div className="form-group full-width">
                     <label>{t('settings.currentPassword')}</label>
@@ -371,9 +348,9 @@ const Parametres = () => {
                   <div className="info-box">
                     <h4>{t('settings.securityTips')}</h4>
                     <ul>
-                      <li>{t('settings.tip1')}</li>
-                      <li>{t('settings.tip2')}</li>
-                      <li>{t('settings.tip3')}</li>
+                      <ol>{t('settings.tip1')}</ol>
+                      <ol>{t('settings.tip2')}</ol>
+                      <ol>{t('settings.tip3')}</ol>
                     </ul>
                   </div>
                 </div>
@@ -383,7 +360,6 @@ const Parametres = () => {
             {/* Section Informations Médicales */}
             {activeSection === 'medical' && (
               <div className="settings-section">
-                <h2>🏥 {t('settings.medical')}</h2>
                 <div className="form-grid">
                   <div className="form-group full-width">
                     <label>{t('settings.allergies')}</label>
@@ -432,7 +408,6 @@ const Parametres = () => {
             {/* Section Gestion des Données */}
             {activeSection === 'donnees' && (
               <div className="settings-section">
-                <h2>💾 {t('settings.dataManagement')}</h2>
                 <div className="data-management">
                   <div className="data-section">
                     <h3>{t('settings.exportData')}</h3>
@@ -460,10 +435,10 @@ const Parametres = () => {
                     <p>{t('settings.dangerDescription')}</p>
                     <div className="button-group">
                       <button type="button" className="btn-danger">
-                        🗑️ {t('settings.deleteAllData')}
+                         {t('settings.deleteAllData')}
                       </button>
                       <button type="button" className="btn-danger">
-                        ❌ {t('settings.deleteAccount')}
+                         {t('settings.deleteAccount')}
                       </button>
                     </div>
                   </div>
@@ -472,12 +447,12 @@ const Parametres = () => {
             )}
 
             {/* Boutons d'action */}
-            <div className="form-actions">
+            <div className="form-actions" style={{ backgroundColor: 'white' }}>
               <button type="submit" className="btn-save" disabled={saving}>
-                {saving ? '⏳ ' + t('common.saving') : '💾 ' + t('common.save')}
+                {saving ? '⏳ ' + t('common.saving') : ' ' + t('common.save')}
               </button>
               <button type="button" className="btn-cancel">
-                ❌ {t('common.cancel')}
+                 {t('common.cancel')}
               </button>
             </div>
           </form>

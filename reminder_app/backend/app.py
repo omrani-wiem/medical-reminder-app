@@ -136,8 +136,8 @@ def login():
         print(traceback.format_exc())
         return jsonify({"error": str(e)}), 400
     
-@app.route("/auth/forget-password", methods=["POST"])
-def forget_password():
+@app.route("/auth/forgot-password", methods=["POST"])
+def forgot_password():
     try:
         data = request.get_json(force=True)
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Dashboard.css';
 import {
@@ -26,8 +26,17 @@ import Statistiques from './Statistiques';
 
 const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState('accueil');
+  
+  // Restaurer le dernier onglet visité ou utiliser 'accueil' par défaut
+  const [activeTab, setActiveTab] = useState(() => {
+    return localStorage.getItem('dashboardActiveTab') || 'accueil';
+  });
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  
+  // Sauvegarder l'onglet actif à chaque changement
+  useEffect(() => {
+    localStorage.setItem('dashboardActiveTab', activeTab);
+  }, [activeTab]);
 
   const menuItems = [
     { id: 'accueil', icon: <FiHome />, label: t('nav.home'), path: '/dashboard' },

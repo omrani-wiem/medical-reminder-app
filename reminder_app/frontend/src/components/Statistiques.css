@@ -9,32 +9,15 @@
 .statistiques-header {
   margin-bottom: 20px;
 }
-
-.statistiques-header h1 {
-  margin: 0 0 5px 0;
-  color: #2c3e50;
-  font-size: 1.7rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.statistiques-header p {
-  margin: 0;
-  color: #7f8c8d;
-  font-size: 0.95rem;
-  font-weight: 400;
-}
-
 /* Contrôles */
 .statistiques-controls {
   background: white;
-  padding: 16px;
+  padding: 18px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   margin-bottom: 20px;
   display: flex;
-  gap: 20px;
-  border: 1px solid #f0f0f0;
+  gap: 40px;
 }
 
 .control-group {
@@ -63,15 +46,15 @@
 .control-select:focus {
   outline: none;
   border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 /* Statistiques principales */
 .stats-overview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .stat-card {
@@ -94,8 +77,8 @@
 }
 
 .stat-card.primary {
-  background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(52, 152, 219, 0.02) 100%);
-  border: 1px solid rgba(52, 152, 219, 0.2);
+   background: linear-gradient(135deg, rgb(244, 246, 246) 0%, rgb(252, 255, 252) 100%);
+   border: 1px solid rgb(249, 250, 253);
 }
 
 .stat-card.primary::before {
@@ -109,8 +92,8 @@
 }
 
 .stat-card.success {
-  background: linear-gradient(135deg, rgba(39, 174, 96, 0.05) 0%, rgba(39, 174, 96, 0.02) 100%);
-  border: 1px solid rgba(39, 174, 96, 0.2);
+  background: linear-gradient(135deg, rgb(244, 246, 246) 0%, rgb(252, 255, 252) 100%);
+  border: 1px solid rgb(249, 250, 253);
 }
 
 .stat-card.success::before {
@@ -120,12 +103,12 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, #27ae60 0%, #229954 100%);
+   background: linear-gradient(180deg, #3b88a9 0%, #407293 100%);
 }
 
 .stat-card.danger {
-  background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(231, 76, 60, 0.02) 100%);
-  border: 1px solid rgba(231, 76, 60, 0.2);
+  background: linear-gradient(135deg, rgb(244, 246, 246) 0%, rgb(252, 255, 252) 100%);
+   border: 1px solid rgb(249, 250, 253);
 }
 
 .stat-card.danger::before {
@@ -135,12 +118,12 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+   background: linear-gradient(180deg, #3b88a9 0%, #407293 100%);
 }
 
 .stat-card.warning {
-  background: linear-gradient(135deg, rgba(243, 156, 18, 0.05) 0%, rgba(243, 156, 18, 0.02) 100%);
-  border: 1px solid rgba(243, 156, 18, 0.2);
+  background: linear-gradient(135deg, rgb(244, 246, 246) 0%, rgb(252, 255, 252) 100%);
+   border: 1px solid rgb(249, 250, 253);
 }
 
 .stat-card.warning::before {
@@ -150,13 +133,7 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, #f39c12 0%, #e67e22 100%);
-}
-
-.stat-icon {
-  font-size: 2.2rem;
-  opacity: 0.7;
-  filter: grayscale(20%);
+  background: linear-gradient(180deg, #3b88a9 0%, #407293 100%);
 }
 
 .stat-content {
@@ -164,21 +141,21 @@
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #2c3e50;
-  margin-bottom: 4px;
+  margin-bottom: 1px;
   letter-spacing: -0.02em;
   line-height: 1;
+
 }
 
 .stat-label {
-  color: #6c757d;
+  color: #000000;
   font-size: 0.85rem;
   font-weight: 600;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  margin-bottom: 3.5px;
+  letter-spacing: 0px;
 }
 
 .stat-trend {
@@ -191,18 +168,7 @@
   letter-spacing: 0.3px;
 }
 
-.stat-trend.positive {
-  background: linear-gradient(135deg, #d4edda 0%, #c8e6c9 100%);
-  color: #2e7d32;
-  border: 1px solid rgba(46, 125, 50, 0.2);
-}
 
-.stat-detail {
-  font-size: 0.75rem;
-  color: #95a5a6;
-  margin-top: 4px;
-  font-weight: 500;
-}
 
 /* Grille des graphiques */
 .charts-grid {
@@ -232,8 +198,6 @@
 
 .chart-header {
   padding: 16px 20px 12px;
-  border-bottom: 1px solid #f0f2f5;
-  background: #fafbfc;
 }
 
 .chart-header h3 {

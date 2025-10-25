@@ -5,9 +5,8 @@
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
-/* Header */
 .historique-header {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .historique-header h1 {
@@ -25,11 +24,11 @@
   font-weight: 400;
 }
 
-/* Statistiques */
+
 .historique-stats {
   display: flex;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   flex-wrap: wrap;
 }
 
@@ -41,7 +40,6 @@
   text-align: center;
   flex: 1;
   min-width: 140px;
-  border: 1px solid #e8ecef;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -53,8 +51,8 @@
 }
 
 .stat-card.primary {
-  background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(52, 152, 219, 0.02) 100%);
-  border: 1px solid rgba(52, 152, 219, 0.2);
+  background: linear-gradient(135deg, rgb(241, 242, 242) 0%, rgb(241, 242, 242) 100%);
+  border: 1px solid rgb(252, 254, 255);
 }
 
 .stat-card.primary::before {
@@ -64,27 +62,11 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, #3498db 0%, #2980b9 100%);
-}
-
-.stat-card.success {
-  background: linear-gradient(135deg, rgba(39, 174, 96, 0.05) 0%, rgba(39, 174, 96, 0.02) 100%);
-  border: 1px solid rgba(39, 174, 96, 0.2);
-}
-
-.stat-card.success::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, #27ae60 0%, #229954 100%);
 }
 
 .stat-card.danger {
-  background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(231, 76, 60, 0.02) 100%);
-  border: 1px solid rgba(231, 76, 60, 0.2);
+  background: linear-gradient(135deg, rgb(241, 242, 242) 0%, rgb(241, 242, 242) 100%);
+  border: 1px solid rgb(245, 240, 240);
 }
 
 .stat-card.danger::before {
@@ -113,8 +95,8 @@
 }
 
 .stat-number {
-  font-size: 1.9rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 700;
   color: #2c3e50;
   margin-bottom: 4px;
   letter-spacing: -0.02em;
@@ -134,9 +116,7 @@
   background: white;
   padding: 18px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   margin-bottom: 20px;
-  border: 1px solid #e8ecef;
 }
 
 .filtres-row {

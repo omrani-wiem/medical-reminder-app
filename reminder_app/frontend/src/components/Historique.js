@@ -206,23 +206,19 @@ const Historique = () => {
       <div className="historique-stats">
         <div className="stat-card">
           <div className="stat-number">{stats.total}</div>
-          <div className="stat-label">{t('history.totalDoses')}</div>
+          <div className="stat-label">{t('total Doses')}</div>
         </div>
-        <div className="stat-card success">
-          <div className="stat-number">{stats.pris}</div>
-          <div className="stat-label">{t('history.successfulDoses')}</div>
-        </div>
-        <div className="stat-card danger">
+        <div className="stat-card danger" >
           <div className="stat-number">{stats.manques}</div>
-          <div className="stat-label">{t('history.missedDoses')}</div>
+          <div className="stat-label">{t('missed Doses')}</div>
         </div>
         <div className="stat-card primary">
           <div className="stat-number">{stats.adherence}%</div>
-          <div className="stat-label">{t('history.adherenceRate')}</div>
+          <div className="stat-label">{t('adherence Rate')}</div>
         </div>
         <div className="stat-card warning">
           <div className="stat-number">{stats.retardMoyen}min</div>
-          <div className="stat-label">{t('history.avgDelay')}</div>
+          <div className="stat-label">{t('avg Delay')}</div>
         </div>
       </div>
 
@@ -236,7 +232,7 @@ const Historique = () => {
               name="recherche"
               value={filtres.recherche}
               onChange={handleFiltreChange}
-              placeholder={t('history.searchPlaceholder')}
+              placeholder={t('search')}
               className="filtre-input"
             />
           </div>
@@ -256,22 +252,22 @@ const Historique = () => {
           </div>
 
           <div className="filtre-group">
-            <label>{t('history.period')}</label>
+            <label>{t('period')}</label>
             <select
               name="periode"
               value={filtres.periode}
               onChange={handleFiltreChange}
               className="filtre-select"
             >
-              <option value="7j">{t('history.last7Days')}</option>
-              <option value="30j">{t('history.last30Days')}</option>
-              <option value="90j">{t('history.last3Months')}</option>
-              <option value="tous">{t('history.allPeriod')}</option>
+              <option value="7j">{t('last7Days')}</option>
+              <option value="30j">{t('last30Days')}</option>
+              <option value="90j">{t('last3Months')}</option>
+              <option value="tous">{t('allPeriod')}</option>
             </select>
           </div>
 
           <div className="filtre-group">
-            <label>{t('history.startDate')}</label>
+            <label>{t('start Date')}</label>
             <input
               type="date"
               name="dateDebut"
@@ -282,7 +278,7 @@ const Historique = () => {
           </div>
 
           <div className="filtre-group">
-            <label>{t('history.endDate')}</label>
+            <label>{t('end Date')}</label>
             <input
               type="date"
               name="dateFin"
@@ -295,7 +291,7 @@ const Historique = () => {
 
         <div className="actions-row">
           <div className="resultats-info">
-            {donneesFiltrées.length} {t('history.resultsFound', { count: donneesFiltrées.length })}
+            {donneesFiltrées.length} {t('results Found', { count: donneesFiltrées.length })}
           </div>
           <div className="export-buttons">
             <button
@@ -322,7 +318,7 @@ const Historique = () => {
               <th>{t('history.date')}</th>
               <th>{t('history.time')}</th>
               <th>{t('history.medication')}</th>
-              <th>{t('history.dosageForm')}</th>
+              <th>{t('dosageForm')}</th>
               <th>{t('history.status')}</th>
               <th>{t('history.actualTime')}</th>
               <th>{t('history.delay')}</th>
@@ -336,8 +332,7 @@ const Historique = () => {
                 <td colSpan="9" className="no-data">
                   <div className="no-data-content">
                     <div className="no-data-icon">📋</div>
-                    <h3>{t('history.noResults')}</h3>
-                    <p>{t('history.modifySearch')}</p>
+                    <h3>{t('noResults')}</h3>
                   </div>
                 </td>
               </tr>

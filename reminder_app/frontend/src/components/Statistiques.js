@@ -280,7 +280,7 @@ const Statistiques = () => {
   const donneesMedicaments = generateDonneesMedicaments();
   const donneesHeures = generateDonneesHeures();
 
-  // Données pour Chart.js
+  // Données pour Chart.js(statistiques weeklyTrend)
   const chartJsAdherenceData = {
     labels: donneesAdherence.map(d => d.jour),
     datasets: [
@@ -292,10 +292,11 @@ const Statistiques = () => {
         borderWidth: 3,
         fill: true,
         tension: 0.4,
-        pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+        pointBackgroundColor: 'rgba(158, 80, 127, 1)',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
-        pointRadius: 6
+        pointRadius: 6,
+        borderColor: 'rgba(219, 52, 158, 1)'
       }
     ]
   };
@@ -422,7 +423,7 @@ const Statistiques = () => {
 
   const stats = calculateGlobalStats();
 
-  const COLORS = ['#27ae60', '#e74c3c', '#f39c12', '#3498db', '#9b59b6'];
+  const COLORS = ['#27ae60', '#e74c3c', '#a9731bff', '#3498db', '#9124bcff'];
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -442,29 +443,24 @@ const Statistiques = () => {
 
   return (
     <div className="statistiques">
-      <div className="statistiques-header">
-        <h1>{t('statistics.title')}</h1>
-        <p>{t('statistics.subtitle')}</p>
-      </div>
-
       {/* Contrôles */}
       <div className="statistiques-controls">
         <div className="control-group">
-          <label>{t('statistics.analysisPeriod')}</label>
+          <label>{t('Period')}</label>
           <select value={periode} onChange={(e) => setPeriode(e.target.value)} className="control-select">
-            <option value="7j">{t('statistics.last7Days')}</option>
-            <option value="30j">{t('statistics.last30Days')}</option>
-            <option value="90j">{t('statistics.last3Months')}</option>
-            <option value="1an">{t('statistics.oneYear')}</option>
+            <option value="7j">{t('last 7 Days')}</option>
+            <option value="30j">{t('last 30 Days')}</option>
+            <option value="90j">{t('last 3 Months')}</option>
+            <option value="1an">{t('one Year')}</option>
           </select>
         </div>
         <div className="control-group">
-          <label>{t('statistics.chartType')}</label>
+          <label>{t('chartType')}</label>
           <select value={typeGraphique} onChange={(e) => setTypeGraphique(e.target.value)} className="control-select">
-            <option value="adherence">{t('statistics.globalAdherence')}</option>
-            <option value="medicaments">{t('statistics.byMedication')}</option>
-            <option value="temporel">{t('statistics.timeEvolution')}</option>
-            <option value="heures">{t('statistics.timeDistribution')}</option>
+            <option value="adherence">{t('global Adherence')}</option>
+            <option value="medicaments">{t('by Medication')}</option>
+            <option value="temporel">{t('time Evolution')}</option>
+            <option value="heures">{t('time Distribution')}</option>
           </select>
         </div>
       </div>
@@ -472,35 +468,27 @@ const Statistiques = () => {
       {/* Statistiques principales */}
       <div className="stats-overview">
         <div className="stat-card primary">
-          <div className="stat-icon">🎯</div>
           <div className="stat-content">
             <div className="stat-number">{stats.adherenceGlobale}%</div>
             <div className="stat-label">{t('statistics.globalAdherence')}</div>
-            <div className="stat-trend positive">{stats.tendance} {t('statistics.thisMonth')}</div>
           </div>
         </div>
         <div className="stat-card success">
-          <div className="stat-icon">✅</div>
           <div className="stat-content">
             <div className="stat-number">{stats.prisesReussies}</div>
-            <div className="stat-label">{t('statistics.successfulDoses')}</div>
-            <div className="stat-detail">{t('statistics.outOf')} {stats.totalPrises} {t('statistics.total')}</div>
+            <div className="stat-label">{t('successful Doses')}</div>
           </div>
         </div>
         <div className="stat-card danger">
-          <div className="stat-icon">❌</div>
           <div className="stat-content">
             <div className="stat-number">{stats.prisesManquees}</div>
-            <div className="stat-label">{t('statistics.missedDoses')}</div>
-            <div className="stat-detail">{Math.round((stats.prisesManquees / stats.totalPrises) * 100)}% {t('statistics.ofTotal')}</div>
+            <div className="stat-label">{t('missed Doses')}</div>
           </div>
         </div>
         <div className="stat-card warning">
-          <div className="stat-icon">⏰</div>
           <div className="stat-content">
             <div className="stat-number">{stats.prisesRetard}</div>
-            <div className="stat-label">{t('statistics.delayedDoses')}</div>
-            <div className="stat-detail">{Math.round((stats.prisesRetard / stats.totalPrises) * 100)}% {t('statistics.ofTotal')}</div>
+            <div className="stat-label">{t('delayed Doses')}</div>
           </div>
         </div>
       </div>
@@ -511,14 +499,13 @@ const Statistiques = () => {
         {/* Graphique d'adhérence quotidienne - Recharts */}
         <div className="chart-container">
           <div className="chart-header">
-            <h3>{t('statistics.dailyAdherence')}</h3>
-            <span className="chart-subtitle">{t('statistics.evolution7Days')}</span>
+            <h3>{t('Daily Adherence')}</h3>
           </div>
           <div className="chart-content">
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={donneesAdherence}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="jour" stroke="#7f8c8d" fontSize={12} />
+                <XAxis dataKey="jour" stroke="#7f8c8d" fontSize={11} />
                 <YAxis stroke="#7f8c8d" fontSize={12} />
                 <Tooltip content={<CustomTooltip />} />
                 <Area
@@ -542,8 +529,7 @@ const Statistiques = () => {
         {/* Graphique d'adhérence Chart.js */}
         <div className="chart-container">
           <div className="chart-header">
-            <h3>{t('statistics.weeklyTrend')}</h3>
-            <span className="chart-subtitle">{t('statistics.smoothCurve')}</span>
+            <h3>{t('weekly Trend')}</h3>
           </div>
           <div className="chart-content">
             <ChartLine data={chartJsAdherenceData} options={chartOptions} height={300} />
@@ -554,7 +540,6 @@ const Statistiques = () => {
         <div className="chart-container">
           <div className="chart-header">
             <h3>{t('statistics.doseDistribution')}</h3>
-            <span className="chart-subtitle">{t('statistics.globalOverview')}</span>
           </div>
           <div className="chart-content">
             <ResponsiveContainer width="100%" height={300}>
@@ -583,7 +568,6 @@ const Statistiques = () => {
         <div className="chart-container">
           <div className="chart-header">
             <h3>{t('statistics.distribution')}</h3>
-            <span className="chart-subtitle">{t('statistics.interactiveChart')}</span>
           </div>
           <div className="chart-content">
             <Doughnut 
@@ -609,7 +593,6 @@ const Statistiques = () => {
         <div className="chart-container large">
           <div className="chart-header">
             <h3>{t('statistics.monthlyEvolution')}</h3>
-            <span className="chart-subtitle">{t('statistics.trend10Months')}</span>
           </div>
           <div className="chart-content">
             <ResponsiveContainer width="100%" height={300}>
@@ -637,44 +620,6 @@ const Statistiques = () => {
                 />
               </LineChart>
             </ResponsiveContainer>
-          </div>
-        </div>
-
-
-
-      </div>
-
-      {/* Insights et recommandations */}
-      <div className="insights-section">
-        <h3>{t('statistics.insights')}</h3>
-        <div className="insights-grid">
-          <div className="insight-card positive">
-            <div className="insight-icon">🎯</div>
-            <div className="insight-content">
-              <h4>{t('statistics.excellentRate')}</h4>
-              <p>{t('statistics.excellentMessage', { rate: stats.adherenceGlobale })}</p>
-            </div>
-          </div>
-          <div className="insight-card info">
-            <div className="insight-icon">📅</div>
-            <div className="insight-content">
-              <h4>{t('statistics.bestDay')}: {stats.meilleurJour}</h4>
-              <p>{t('statistics.bestDayMessage')}</p>
-            </div>
-          </div>
-          <div className="insight-card warning">
-            <div className="insight-icon">⚠️</div>
-            <div className="insight-content">
-              <h4>{t('statistics.attention')} {stats.pireJour}</h4>
-              <p>{t('statistics.worstDayMessage')}</p>
-            </div>
-          </div>
-          <div className="insight-card tip">
-            <div className="insight-icon">💡</div>
-            <div className="insight-content">
-              <h4>{t('statistics.optimalTime')}: {stats.heureOptimale}</h4>
-              <p>{t('statistics.optimalTimeMessage')}</p>
-            </div>
           </div>
         </div>
       </div>
