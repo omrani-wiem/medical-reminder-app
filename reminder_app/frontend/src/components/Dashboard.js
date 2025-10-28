@@ -27,7 +27,7 @@ import Statistiques from './Statistiques';
 const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
   const { t } = useTranslation();
   
-  // Restaurer le dernier onglet visité ou utiliser 'accueil' par défaut
+ 
   const [activeTab, setActiveTab] = useState(() => {
     return localStorage.getItem('dashboardActiveTab') || 'accueil';
   });

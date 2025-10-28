@@ -19,8 +19,8 @@
 .header-top h1 {
   margin: 0;
   color: #2c3e50;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .btn-add-medicament {
@@ -32,7 +32,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .btn-add-medicament:hover {
@@ -43,7 +43,7 @@
 /* Contrôles */
 .medicaments-controls {
   display: flex;
-  gap: 20px;
+  gap: 60px;
   margin-bottom: 25px;
   flex-wrap: wrap;
 }
@@ -75,7 +75,7 @@
   font-size: 1rem;
   background: white;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 100px;
 }
 
 /* Statistiques */
@@ -89,22 +89,19 @@
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   text-align: center;
-  flex: 1;
-  border: 1px solid #f0f0f0;
+  flex: 1
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: 1.2rem !important;
   font-weight: 700;
-  color: #3498db;
   margin-bottom: 5px;
 }
 
 .stat-label {
   color: #7f8c8d;
-  font-size: 0.9rem;
+  font-size: 0.4rem;
   font-weight: 500;
 }
 
@@ -115,22 +112,22 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
+
 }
 
 .modal-content {
   background: white;
   border-radius: 16px;
+  border: 1px solid white;
   max-width: 800px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 .modal-header {
@@ -139,24 +136,24 @@
   align-items: center;
   padding: 25px 30px;
   border-bottom: 1px solid #e1e5e9;
+  font-size: 1.2rem;
+  height: 10px;
 }
 
 .modal-header h3 {
   margin: 0;
   color: #2c3e50;
-  font-size: 1.4rem;
+  font-size: 1.1rem !important;
   font-weight: 600;
 }
 
-.btn-close {
-  background: #e74c3c;
-  color: white;
-  border: none;
+.modal-header .btn-close {
+  background: #ea0000 ;
+  color: white ;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,36 +161,48 @@
 
 /* Formulaire */
 .medicament-form {
-  padding: 30px;
+  padding: 20px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-bottom: 20px !important;
+  background: #f8f9fa;
+  border-radius: 0 0 12px 12px;
 }
 
 .form-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
 }
 
 .form-group {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .form-group label {
   color: #2c3e50;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
+
+
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 12px 16px;
-  border: 2px solid #e1e5e9;
-  border-radius: 8px;
+  padding: 10px 15px;
+  border: 2px solid #e1e8ed;
+  border-radius: 10px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  background: white;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 .form-group input:focus,
@@ -201,67 +210,93 @@
 .form-group textarea:focus {
   outline: none;
   border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #95a5a6;
+  font-style: italic;
 }
 
 .form-group textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233498db' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
 }
 
 .form-buttons {
   display: flex;
-  gap: 15px;
+  gap: 1px;
   justify-content: flex-end;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid #e1e5e9;
+  margin-top: 35px;
+  padding-top: 25px;
 }
 
 .btn-save {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: linear-gradient(135deg, #2dc628, #0ec981);
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 14px 32px;
+  border-radius: 10px;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.25);
 }
 
 .btn-save:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.btn-save:active {
+  transform: translateY(0);
 }
 
 .btn-cancel {
-  background: #95a5a6;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
+  background: white;
+  color: #7f8c8d;
+  border: 2px solid #e1e8ed;
+  padding: 14px 32px;
+  border-radius: 10px;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-cancel:hover {
-  background: #7f8c8d;
+  background: #f8f9fa;
+  border-color: #bdc3c7;
+  color: #2c3e50;
   transform: translateY(-2px);
+}
+
+.btn-cancel:active {
+  transform: translateY(0);
 }
 
 /* Tableau des médicaments */
 .medicaments-table-container {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  border: 1px solid #f0f0f0;
 }
 
 .medicaments-table {
   width: 100%;
-  border-collapse: collapse;
   font-size: 0.9rem;
 }
 
@@ -271,14 +306,12 @@
   font-weight: 600;
   padding: 15px 12px;
   text-align: left;
-  border-bottom: 2px solid #e1e5e9;
   font-size: 0.85rem;
   white-space: nowrap;
 }
 
 .medicaments-table td {
   padding: 12px;
-  border-bottom: 1px solid #f0f2f5;
   vertical-align: top;
 }
 
@@ -394,7 +427,6 @@
   background: white;
   border-radius: 16px;
   padding: 25px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #f0f0f0;
   transition: all 0.3s ease;
 }
@@ -443,34 +475,6 @@
   background: rgba(231, 76, 60, 0.1);
 }
 
-/* Détails du médicament */
-.medicament-details {
-  margin-bottom: 20px;
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #f8f9fa;
-}
-
-.detail-row:last-child {
-  border-bottom: none;
-}
-
-.detail-label {
-  color: #7f8c8d;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-.detail-value {
-  color: #2c3e50;
-  font-weight: 600;
-  text-align: right;
-}
 
 /* Informations sur le stock */
 .stock-info {

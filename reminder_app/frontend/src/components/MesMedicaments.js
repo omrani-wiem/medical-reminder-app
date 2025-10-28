@@ -194,7 +194,7 @@ const MesMedicaments = () => {
     <div className="mes-medicaments">
       <div className="medicaments-header">
         <div className="header-top">
-          <h1>{t('medications.title')} 💊</h1>
+          <h1>{t('medications.title')} </h1>
           <button 
             className="btn-add-medicament"
             onClick={() => {
@@ -216,7 +216,7 @@ const MesMedicaments = () => {
               });
             }}
           >
-            ➕ {t('medications.add')}
+          {t('medications.add')}
           </button>
         </div>
         
@@ -247,7 +247,7 @@ const MesMedicaments = () => {
         <div className="medicaments-stats">
           <div className="stat-card">
             <div className="stat-number">{medicaments.length}</div>
-            <div className="stat-label">{t('common.total')}</div>
+            <div className="stat-label">{t('total')}</div>
           </div>
           <div className="stat-card">
             <div className="stat-number">{medicaments.filter(m => m.stock <= m.stockMin).length}</div>
@@ -280,7 +280,7 @@ const MesMedicaments = () => {
             <form onSubmit={handleSubmit} className="medicament-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label>{t('medications.medicationName')} *</label>
+                  <label>{t('medications.medicationName')} <span style={{ color: 'red' }}>*</span></label>
                   <input
                     type="text"
                     name="nom"
@@ -290,7 +290,7 @@ const MesMedicaments = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>{t('medications.dosageLabel')} *</label>
+                  <label>{t('medications.dosageLabel')} <span style={{ color: 'red' }}>*</span></label>
                   <input
                     type="text"
                     name="dosage"
@@ -332,7 +332,7 @@ const MesMedicaments = () => {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>{t('medications.frequencyLabel')} *</label>
+                  <label>{t('medications.frequencyLabel')} <span style={{ color: 'red' }}>*</span></label>
                   <input
                     type="text"
                     name="frequence"
@@ -343,7 +343,7 @@ const MesMedicaments = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>{t('medications.duration')} *</label>
+                  <label>{t('medications.duration')} <span style={{ color: 'red' }}>*</span></label>
                   <input
                     type="text"
                     name="duree"
@@ -460,10 +460,10 @@ const MesMedicaments = () => {
             </tr>
           </thead>
           <tbody>
-            {medicamentsFiltres.map(medicament => {
+            {medicamentsFiltres.map((medicament, index) => {
               const stockStatus = getStockStatus(medicament.stock, medicament.stockMin);
               return (
-                <tr key={medicament.id}>
+                <tr key={medicament._id || medicament.id || index}>
                   <td className="medicament-name-cell">
                     <strong>{medicament.nom}</strong>
                   </td>
@@ -505,7 +505,7 @@ const MesMedicaments = () => {
                     </button>
                     <button 
                       className="btn-delete-table"
-                      onClick={() => handleDelete(medicament.id)}
+                      onClick={() => handleDelete(medicament._id || medicament.id)}
                       title="Supprimer"
                     >
                       🗑️
@@ -520,7 +520,7 @@ const MesMedicaments = () => {
 
       {medicamentsFiltres.length === 0 && (
         <div className="no-results">
-          <div className="no-results-icon">💊</div>
+          <div className="no-results-icon"></div>
           <h3>Aucun médicament trouvé</h3>
           <p>Essayez de modifier vos critères de recherche ou ajoutez un nouveau médicament.</p>
         </div>
