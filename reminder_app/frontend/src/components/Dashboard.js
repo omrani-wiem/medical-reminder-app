@@ -84,15 +84,6 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
             </ul>
         </nav>
         <div className="sidebar-footer">
-            <div className="user-info">
-                <div className="user-avatar"><FiUser /></div>
-                {!sidebarCollapsed && (
-                  <div className="user-details">
-                    <span className="user-name">{currentUser}</span>
-                    <span className="user-role">{t('dashboard.patient')}</span>
-                   </div>
-                )}
-            </div>
             <button 
             className="logout-btn"
             onClick={onLogout}
@@ -141,7 +132,7 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
   );
 };
 
-// Contenu par défaut pour chaque section
+
 const DefaultDashboardContent = ({ activeTab }) => {
     switch (activeTab) {
         case 'accueil':
