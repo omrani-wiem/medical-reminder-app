@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 #  Medical Reminder App
+=======
+#  Medical Reminder App - Application de Rappel Médical
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 <div align="center">
 
+<<<<<<< HEAD
 ![React](https://img.shields.io/badge/React-19.1.1-blue?logo=react)
 ![Python](https://img.shields.io/badge/Python-3.11+-green?logo=python)
 ![Flask](https://img.shields.io/badge/Flask-3.1.2-lightgrey?logo=flask)
@@ -10,9 +15,23 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 A modern, full-stack web application that helps patients manage their medications and medication adherence through automated reminders, intake tracking, and comprehensive analytics.
+=======
+##  Table des matières
+- [Présentation](#-présentation)
+- [Fonctionnalités](#-fonctionnalités)
+- [Technologies](#-technologies)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Utilisation](#-utilisation)
+- [Sécurité](#-sécurité)
+- [Support multilingue](#-support-multilingue)
+
+##  Présentation
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 [Features](#-features) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Documentation](#-documentation)
 
+<<<<<<< HEAD
 </div>
 
 ---
@@ -47,6 +66,58 @@ Perfect for patients managing chronic conditions, caregivers tracking multiple u
 - Set low stock alerts and reorder reminders
 - Add custom medication instructions and notes
 - Comprehensive medication history
+=======
+**Fonctionnalités principales :**
+-  Gestion complète des médicaments
+-  Rappels automatiques par email
+-  Statistiques et analyses d'adhérence
+-  Calendrier des prises
+-  Support trilingue (FR, EN, AR tunisien)
+-  Authentification sécurisée
+-  Récupération de mot de passe
+
+##  Fonctionnalités
+
+###  Authentification
+- Inscription / Connexion sécurisée
+- Mot de passe oublié avec code par email
+- Changement de mot de passe
+- Hash SHA-256 des mots de passe
+
+###  Gestion des médicaments
+- Ajout/modification/suppression de médicaments
+- Informations détaillées (dosage, forme, fréquence)
+- Gestion du stock (alerte stock bas)
+- Instructions de prise personnalisées
+- Médecin prescripteur
+
+###  Rappels intelligents
+- Configuration des heures de prise
+- Rappels par email automatiques
+- Activation/désactivation par médicament
+- Suivi des prises (prises/manquées)
+
+###  Statistiques et analyses
+- Taux d'adhérence global et par période
+- Évolution temporelle
+- Graphiques interactifs (Chart.js + Recharts)
+- Identification des meilleurs/pires jours
+- Recommandations personnalisées
+
+###  Calendrier
+- Vue jour/semaine/mois
+- Historique complet des prises
+- Filtres avancés (statut, période, dates)
+- Export CSV/PDF
+
+###  Paramètres
+- Profil utilisateur personnalisable
+- Changement de langue en temps réel
+- Support RTL pour l'arabe
+- Gestion des notifications
+
+##  Technologies
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 ###  **Smart Reminder System**
 - Configurable intake times for each medication
@@ -64,6 +135,7 @@ Perfect for patients managing chronic conditions, caregivers tracking multiple u
 - Personalized health insights and recommendations
 - Data export capabilities
 
+<<<<<<< HEAD
 ###  **Calendar & History**
 - Multi-view calendar (day/week/month)
 - Complete intake history repository
@@ -71,6 +143,9 @@ Perfect for patients managing chronic conditions, caregivers tracking multiple u
 - Detailed intake records with timestamps
 - Adherence status visualization
 - Historical data analysis
+=======
+##  Installation
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 ###  **User Settings & Preferences**
 - User profile customization
@@ -172,10 +247,89 @@ echo MAIL_PORT=587 >> .env
 echo MAIL_USERNAME=your.email@gmail.com >> .env
 echo MAIL_PASSWORD=your_app_password >> .env
 
+<<<<<<< HEAD
 # Run the backend
+=======
+```bash
+cd ../frontend
+npm install
+```
+
+## 🔧 Configuration
+
+### Backend - Variables d'environnement
+
+1. **Créer le fichier `.env`** dans `backend/`
+```bash
+cd backend
+copy env.example .env
+```
+
+2. **Remplir `.env`** avec vos vraies valeurs :
+
+```env
+# Flask
+FLASK_SECRET_KEY=votre_cle_secrete_ultra_securisee
+FLASK_ENV=development
+FLASK_DEBUG=True
+
+# MongoDB
+MONGO_URI=mongodb://localhost:27017/medical_reminder
+MONGO_DB_NAME=medical_reminder
+
+# Gmail SMTP
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USE_SSL=False
+MAIL_USERNAME=votre.email@gmail.com
+MAIL_PASSWORD=xxxx xxxx xxxx xxxx
+MAIL_DEFAULT_SENDER_NAME=Medical Reminder App
+MAIL_DEFAULT_SENDER_EMAIL=votre.email@gmail.com
+
+# Frontend
+FRONTEND_URL=http://localhost:3000
+
+# Tokens
+TOKEN_EXPIRATION_HOURS=24
+RESET_CODE_EXPIRATION_MINUTES=15
+```
+
+###  Configuration Gmail SMTP
+
+Pour Gmail, créez un **"Mot de passe d'application"** :
+
+1. Allez sur https://myaccount.google.com/
+2. **Sécurité** → **Validation en deux étapes** (activez-la)
+3. **Sécurité** → **Mots de passe des applications**
+4. Créez un mot de passe pour "Medical Reminder App"
+5. Copiez le mot de passe généré (format : `xxxx xxxx xxxx xxxx`)
+6. Collez-le dans `MAIL_PASSWORD`
+
+##  Utilisation
+
+### Démarrer MongoDB
+
+```bash
+# Windows (si installé en tant que service)
+net start MongoDB
+
+# Ou démarrez MongoDB manuellement
+mongod
+```
+
+### Démarrer le Backend
+
+```bash
+cd backend
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 python app.py
 # Server will be available at http://localhost:5000
 ```
+<<<<<<< HEAD
+=======
+ Backend disponible sur : **http://localhost:5000**
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 **Step 2: Frontend Setup**
 
@@ -189,6 +343,7 @@ npm install
 npm run dev
 # Server will be available at http://localhost:5173 (or configured port)
 ```
+<<<<<<< HEAD
 
 ### Quick Start - Option 3: PowerShell Script (Windows Only)
 
@@ -204,10 +359,41 @@ This script will automatically:
 - Start the React frontend in another new PowerShell window
 
 ---
+=======
+ Frontend disponible sur : **http://localhost:3000**
+
+##  Sécurité
+
+### Fichiers sensibles (JAMAIS commit sur Git)
+-  `backend/.env` - Contient les mots de passe et tokens
+-  `backend/venv/` - Environnement virtuel Python
+-  `frontend/node_modules/` - Dépendances Node.js
+
+### Fichiers safe pour Git
+-  `backend/env.example` - Template sans données sensibles
+-  `backend/.gitignore` - Configuration d'exclusion Git
+-  `frontend/.gitignore` - Configuration d'exclusion Git
+
+### Bonnes pratiques
+-  Mots de passe hashés (SHA-256)
+-  Codes de réinitialisation à usage unique
+-  Expiration automatique des codes (15 min)
+-  CORS configuré pour le frontend uniquement
+-  "Mot de passe d'application" Gmail (pas le mot de passe principal)
+
+##  Support multilingue
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 ##  Environment Configuration
 
+<<<<<<< HEAD
 Create a `.env` file in the `backend/` directory:
+=======
+### Changement de langue
+1. Aller dans **Paramètres** ()
+2. Section "Langue de l'application"
+3. Cliquer sur le drapeau de la langue souhaitée
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 ```env
 # Flask Configuration
@@ -215,6 +401,7 @@ FLASK_SECRET_KEY=your_very_secure_secret_key_here
 FLASK_ENV=development
 FLASK_APP=app.py
 
+<<<<<<< HEAD
 # MongoDB Configuration
 MONGO_URI=mongodb://localhost:27017/medical_reminder
 MONGO_DB_NAME=medical_reminder
@@ -349,6 +536,9 @@ POST   /history                 - Log medication intake
 ---
 
 ## 📁 Project Structure
+=======
+##  Structure du projet
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 ```
 reminder_app/
@@ -404,7 +594,11 @@ reminder_app/
 └── README.md                # This file!
 ```
 
+<<<<<<< HEAD
 ---
+=======
+##  Base de données MongoDB
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 ## 🔐 Security Features
 
@@ -419,6 +613,7 @@ reminder_app/
 
 ## 🧪 Testing
 
+<<<<<<< HEAD
 The project includes test files for quality assurance:
 - `frontend/src/App.test.js` - Main component tests
 - `frontend/src/App.test.simple.js` - Simple test examples
@@ -522,6 +717,9 @@ For issues, questions, or suggestions:
 [⬆ Back to top](#-medical-reminder-app)
 
 </div>
+=======
+##  Endpoints API
+>>>>>>> b77611a2b70201213a4e5290f18dd7d2733c8ab3
 
 ### Authentication
 - `POST /auth/register` - Créer un compte
@@ -538,30 +736,30 @@ For issues, questions, or suggestions:
 - `GET /settings?email=...` - Récupérer
 - `PUT /settings` - Sauvegarder
 
-## 👥 Auteurs
+##  Auteurs
 
 - **Wiem Omrani** - Développement
 - **Fridhi Rochdi** - Maintenance
 
-## 📝 License
+##  License
 
 Ce projet est à usage éducatif.
 
-## 🐛 Problèmes connus
+##  Problèmes connus
 
 ### Backend ne démarre pas
-- ✅ Vérifiez que MongoDB est démarré
-- ✅ Vérifiez `.env` est présent et rempli
-- ✅ Vérifiez `python-dotenv` est installé
+-  Vérifiez que MongoDB est démarré
+-  Vérifiez `.env` est présent et rempli
+-  Vérifiez `python-dotenv` est installé
 
 ### Emails non reçus
-- ✅ Vérifiez le mot de passe d'application Gmail
-- ✅ Vérifiez les spams
-- ✅ Testez avec `voir_code_reset.py`
+-  Vérifiez le mot de passe d'application Gmail
+-  Vérifiez les spams
+-  Testez avec `voir_code_reset.py`
 
 ### Erreur CORS
-- ✅ Vérifiez `FRONTEND_URL` dans `.env`
-- ✅ Vérifiez le frontend tourne sur port 3000
+-  Vérifiez `FRONTEND_URL` dans `.env`
+-  Vérifiez le frontend tourne sur port 3000
 
 ## 🎉 Remerciements
 

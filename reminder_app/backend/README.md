@@ -25,7 +25,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 🔒 Configuration des variables d'environnement
+##  Configuration des variables d'environnement
 
 ### 1. Créer le fichier `.env`
 Copiez le fichier d'exemple :
@@ -42,7 +42,7 @@ MONGO_DB_NAME=medical_reminder
 ```
 
 #### **Gmail SMTP (pour les emails)**
-⚠️ **Important** : Pour Gmail, vous devez créer un **"Mot de passe d'application"**
+ **Important** : Pour Gmail, vous devez créer un **"Mot de passe d'application"**
 
 **Étapes :**
 1. Allez sur votre compte Google : https://myaccount.google.com/
@@ -91,7 +91,7 @@ TOKEN_EXPIRATION_HOURS=24
 RESET_CODE_EXPIRATION_MINUTES=15
 ```
 
-## 🚀 Démarrer le serveur
+##  Démarrer le serveur
 
 ```bash
 python app.py
@@ -99,7 +99,7 @@ python app.py
 
 Le serveur démarre sur : **http://localhost:5000**
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Authentication
 - `POST /auth/register` - Créer un compte
@@ -116,11 +116,11 @@ Le serveur démarre sur : **http://localhost:5000**
 - `GET /settings?email=...` - Récupérer les paramètres
 - `PUT /settings` - Mettre à jour les paramètres
 
-## 🔐 Sécurité
+##  Sécurité
 
 ### Fichiers sensibles
-- ✅ `.env` - **JAMAIS commit sur GitHub**
-- ✅ `env.example` - Template sans données sensibles (safe pour GitHub)
+-  `.env` - **JAMAIS commit sur GitHub**
+-  `env.example` - Template sans données sensibles (safe pour GitHub)
 
 ### .gitignore
 Le fichier `.gitignore` est configuré pour ignorer :
@@ -129,7 +129,7 @@ Le fichier `.gitignore` est configuré pour ignorer :
 - `venv/` environnement virtuel
 - Logs et fichiers de backup
 
-## 🗄️ Base de données
+##  Base de données
 
 ### MongoDB Collections
 
@@ -170,7 +170,7 @@ Le fichier `.gitignore` est configuré pour ignorer :
 }
 ```
 
-## 📧 Configuration Email
+##  Configuration Email
 
 ### Test de l'envoi d'email
 Pour tester si l'email fonctionne :
@@ -178,11 +178,11 @@ Pour tester si l'email fonctionne :
 2. Vérifiez votre boîte de réception (et spam)
 
 ### Problèmes courants
-- ❌ **535-5.7.8 Username and Password not accepted** → Mauvais mot de passe d'application
-- ❌ **Connection refused** → Vérifiez MAIL_SERVER et MAIL_PORT
-- ❌ **Must issue a STARTTLS command** → Vérifiez MAIL_USE_TLS=True
+- **535-5.7.8 Username and Password not accepted** → Mauvais mot de passe d'application
+-  **Connection refused** → Vérifiez MAIL_SERVER et MAIL_PORT
+-  **Must issue a STARTTLS command** → Vérifiez MAIL_USE_TLS=True
 
-## 🛠️ Développement
+##  Développement
 
 ### Structure du projet
 ```
@@ -195,7 +195,7 @@ backend/
 └── README.md          # Ce fichier
 ```
 
-## 📝 Notes
+##  Notes
 
 - Le serveur utilise Flask en mode développement
 - Les mots de passe sont hashés avec SHA-256
