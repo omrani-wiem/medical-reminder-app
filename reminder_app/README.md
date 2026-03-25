@@ -1,8 +1,8 @@
-# 🏥 Medical Reminder App - Application de Rappel Médical
+#  Medical Reminder App - Application de Rappel Médical
 
 Application web complète de gestion de médicaments avec rappels automatiques et support multilingue (Français, English, العربية التونسية).
 
-## 📋 Table des matières
+##  Table des matières
 - [Présentation](#-présentation)
 - [Fonctionnalités](#-fonctionnalités)
 - [Technologies](#-technologies)
@@ -12,60 +12,60 @@ Application web complète de gestion de médicaments avec rappels automatiques e
 - [Sécurité](#-sécurité)
 - [Support multilingue](#-support-multilingue)
 
-## 🎯 Présentation
+##  Présentation
 
 Medical Reminder est une application web qui aide les patients à gérer leurs médicaments, leurs rappels de prise et à suivre leur adhérence au traitement.
 
 **Fonctionnalités principales :**
-- 💊 Gestion complète des médicaments
-- ⏰ Rappels automatiques par email
-- 📊 Statistiques et analyses d'adhérence
-- 📅 Calendrier des prises
-- 🌍 Support trilingue (FR, EN, AR tunisien)
-- 🔐 Authentification sécurisée
-- 📧 Récupération de mot de passe
+-  Gestion complète des médicaments
+-  Rappels automatiques par email
+-  Statistiques et analyses d'adhérence
+-  Calendrier des prises
+-  Support trilingue (FR, EN, AR tunisien)
+-  Authentification sécurisée
+-  Récupération de mot de passe
 
-## ✨ Fonctionnalités
+##  Fonctionnalités
 
-### 🔐 Authentification
+###  Authentification
 - Inscription / Connexion sécurisée
 - Mot de passe oublié avec code par email
 - Changement de mot de passe
 - Hash SHA-256 des mots de passe
 
-### 💊 Gestion des médicaments
+###  Gestion des médicaments
 - Ajout/modification/suppression de médicaments
 - Informations détaillées (dosage, forme, fréquence)
 - Gestion du stock (alerte stock bas)
 - Instructions de prise personnalisées
 - Médecin prescripteur
 
-### ⏰ Rappels intelligents
+###  Rappels intelligents
 - Configuration des heures de prise
 - Rappels par email automatiques
 - Activation/désactivation par médicament
 - Suivi des prises (prises/manquées)
 
-### 📊 Statistiques et analyses
+###  Statistiques et analyses
 - Taux d'adhérence global et par période
 - Évolution temporelle
 - Graphiques interactifs (Chart.js + Recharts)
 - Identification des meilleurs/pires jours
 - Recommandations personnalisées
 
-### 📅 Calendrier
+###  Calendrier
 - Vue jour/semaine/mois
 - Historique complet des prises
 - Filtres avancés (statut, période, dates)
 - Export CSV/PDF
 
-### ⚙️ Paramètres
+###  Paramètres
 - Profil utilisateur personnalisable
 - Changement de langue en temps réel
 - Support RTL pour l'arabe
 - Gestion des notifications
 
-## 🛠️ Technologies
+##  Technologies
 
 ### Frontend
 - **React 18.x** - Interface utilisateur
@@ -82,7 +82,7 @@ Medical Reminder est une application web qui aide les patients à gérer leurs m
 - **python-dotenv** - Variables d'environnement
 - **Flask-CORS** - Gestion CORS
 
-## 📦 Installation
+##  Installation
 
 ### Prérequis
 - **Node.js** 16+ et npm
@@ -161,7 +161,7 @@ TOKEN_EXPIRATION_HOURS=24
 RESET_CODE_EXPIRATION_MINUTES=15
 ```
 
-### ⚠️ Configuration Gmail SMTP
+###  Configuration Gmail SMTP
 
 Pour Gmail, créez un **"Mot de passe d'application"** :
 
@@ -172,7 +172,7 @@ Pour Gmail, créez un **"Mot de passe d'application"** :
 5. Copiez le mot de passe généré (format : `xxxx xxxx xxxx xxxx`)
 6. Collez-le dans `MAIL_PASSWORD`
 
-## 🚀 Utilisation
+##  Utilisation
 
 ### Démarrer MongoDB
 
@@ -190,7 +190,7 @@ mongod
 cd backend
 python app.py
 ```
-🌐 Backend disponible sur : **http://localhost:5000**
+ Backend disponible sur : **http://localhost:5000**
 
 ### Démarrer le Frontend
 
@@ -198,28 +198,28 @@ python app.py
 cd frontend
 npm start
 ```
-🌐 Frontend disponible sur : **http://localhost:3000**
+ Frontend disponible sur : **http://localhost:3000**
 
-## 🔒 Sécurité
+##  Sécurité
 
 ### Fichiers sensibles (JAMAIS commit sur Git)
-- ✅ `backend/.env` - Contient les mots de passe et tokens
-- ✅ `backend/venv/` - Environnement virtuel Python
-- ✅ `frontend/node_modules/` - Dépendances Node.js
+-  `backend/.env` - Contient les mots de passe et tokens
+-  `backend/venv/` - Environnement virtuel Python
+-  `frontend/node_modules/` - Dépendances Node.js
 
 ### Fichiers safe pour Git
-- ✅ `backend/env.example` - Template sans données sensibles
-- ✅ `backend/.gitignore` - Configuration d'exclusion Git
-- ✅ `frontend/.gitignore` - Configuration d'exclusion Git
+-  `backend/env.example` - Template sans données sensibles
+-  `backend/.gitignore` - Configuration d'exclusion Git
+-  `frontend/.gitignore` - Configuration d'exclusion Git
 
 ### Bonnes pratiques
-- 🔐 Mots de passe hashés (SHA-256)
-- 🔑 Codes de réinitialisation à usage unique
-- ⏱️ Expiration automatique des codes (15 min)
-- 🚫 CORS configuré pour le frontend uniquement
-- 📧 "Mot de passe d'application" Gmail (pas le mot de passe principal)
+-  Mots de passe hashés (SHA-256)
+-  Codes de réinitialisation à usage unique
+-  Expiration automatique des codes (15 min)
+-  CORS configuré pour le frontend uniquement
+-  "Mot de passe d'application" Gmail (pas le mot de passe principal)
 
-## 🌍 Support multilingue
+##  Support multilingue
 
 ### Langues supportées
 - 🇫🇷 **Français** (langue par défaut)
@@ -227,7 +227,7 @@ npm start
 - 🇸🇦 **العربية** (Dialecte tunisien avec support RTL)
 
 ### Changement de langue
-1. Aller dans **Paramètres** (⚙️)
+1. Aller dans **Paramètres** ()
 2. Section "Langue de l'application"
 3. Cliquer sur le drapeau de la langue souhaitée
 
@@ -237,7 +237,7 @@ L'interface s'adapte automatiquement pour l'arabe :
 - Navigation inversée
 - Disposition miroir
 
-## 📁 Structure du projet
+##  Structure du projet
 
 ```
 rminderapp/
@@ -278,7 +278,7 @@ rminderapp/
 └── README.md                     # Ce fichier
 ```
 
-## 🗄️ Base de données MongoDB
+##  Base de données MongoDB
 
 ### Collections
 
@@ -297,7 +297,7 @@ rminderapp/
 - Langue, notifications
 - Informations médicales
 
-## 📧 Endpoints API
+##  Endpoints API
 
 ### Authentication
 - `POST /auth/register` - Créer un compte
@@ -314,30 +314,30 @@ rminderapp/
 - `GET /settings?email=...` - Récupérer
 - `PUT /settings` - Sauvegarder
 
-## 👥 Auteurs
+##  Auteurs
 
 - **Wiem Omrani** - Développement
 - **Fridhi Rochdi** - Maintenance
 
-## 📝 License
+##  License
 
 Ce projet est à usage éducatif.
 
-## 🐛 Problèmes connus
+##  Problèmes connus
 
 ### Backend ne démarre pas
-- ✅ Vérifiez que MongoDB est démarré
-- ✅ Vérifiez `.env` est présent et rempli
-- ✅ Vérifiez `python-dotenv` est installé
+-  Vérifiez que MongoDB est démarré
+-  Vérifiez `.env` est présent et rempli
+-  Vérifiez `python-dotenv` est installé
 
 ### Emails non reçus
-- ✅ Vérifiez le mot de passe d'application Gmail
-- ✅ Vérifiez les spams
-- ✅ Testez avec `voir_code_reset.py`
+-  Vérifiez le mot de passe d'application Gmail
+-  Vérifiez les spams
+-  Testez avec `voir_code_reset.py`
 
 ### Erreur CORS
-- ✅ Vérifiez `FRONTEND_URL` dans `.env`
-- ✅ Vérifiez le frontend tourne sur port 3000
+-  Vérifiez `FRONTEND_URL` dans `.env`
+-  Vérifiez le frontend tourne sur port 3000
 
 ## 🎉 Remerciements
 
