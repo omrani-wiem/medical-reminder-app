@@ -712,7 +712,6 @@ For issues, questions, or suggestions:
 
 <div align="center">
 
-### Made with ❤️ for better medication adherence
 
 [⬆ Back to top](#-medical-reminder-app)
 
@@ -739,11 +738,6 @@ For issues, questions, or suggestions:
 ##  Auteurs
 
 - **Wiem Omrani** - Développement
-- **Fridhi Rochdi** - Maintenance
-
-##  License
-
-Ce projet est à usage éducatif.
 
 ##  Problèmes connus
 
