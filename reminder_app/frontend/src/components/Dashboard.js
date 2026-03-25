@@ -60,12 +60,6 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
                 <span className="logo-icon"><FiActivity /></span>
                 {!sidebarCollapsed && <span className="logo-text">MedReminder</span>}
             </div>
-            <button
-                className="sidebar-toggle"
-                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            >
-                {sidebarCollapsed ? <FiMenu /> : <FiChevronLeft />}
-            </button>
         </div>
         <nav className="sidebar-nav">
             <ul className="nav-list">

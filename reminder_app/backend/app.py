@@ -30,15 +30,15 @@ CORS(app, resources={
     }
 })
 #config Flask-Mail
-app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.example.com')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
-app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True') == 'True'
-app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'False') == 'True'
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_SERVER'] = 'smtp.example.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = 'omraniwiem62@gmail.com'
+app.config['MAIL_PASSWORD'] = 'odig ebpj fmeh qzlu'
 app.config['MAIL_DEFAULT_SENDER'] = (
-    os.getenv('MAIL_DEFAULT_SENDER_NAME', 'Medical Reminder App'),
-    os.getenv('MAIL_DEFAULT_SENDER_EMAIL')
+    'Medical Reminder App' ,
+     'omraniwiem62@gmail.com'
 )
 app.config['MAIL_MAX_EMAILS'] = None
 app.config['MAIL_ASCII_ATTACHMENTS'] = False

@@ -1,303 +1,527 @@
-# 🏥 Medical Reminder App - Application de Rappel Médical
+#  Medical Reminder App
 
-Application web complète de gestion de médicaments avec rappels automatiques et support multilingue (Français, English, العربية التونسية).
+<div align="center">
 
-## 📋 Table des matières
-- [Présentation](#-présentation)
-- [Fonctionnalités](#-fonctionnalités)
-- [Technologies](#-technologies)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Utilisation](#-utilisation)
-- [Sécurité](#-sécurité)
-- [Support multilingue](#-support-multilingue)
+![React](https://img.shields.io/badge/React-19.1.1-blue?logo=react)
+![Python](https://img.shields.io/badge/Python-3.11+-green?logo=python)
+![Flask](https://img.shields.io/badge/Flask-3.1.2-lightgrey?logo=flask)
+![MongoDB](https://img.shields.io/badge/MongoDB-6-green?logo=mongodb)
+![Docker](https://img.shields.io/badge/Docker-Enabled-blue?logo=docker)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## 🎯 Présentation
+A modern, full-stack web application that helps patients manage their medications and medication adherence through automated reminders, intake tracking, and comprehensive analytics.
 
-Medical Reminder est une application web qui aide les patients à gérer leurs médicaments, leurs rappels de prise et à suivre leur adhérence au traitement.
+[Features](#-features) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Documentation](#-documentation)
 
-**Fonctionnalités principales :**
-- 💊 Gestion complète des médicaments
-- ⏰ Rappels automatiques par email
-- 📊 Statistiques et analyses d'adhérence
-- 📅 Calendrier des prises
-- 🌍 Support trilingue (FR, EN, AR tunisien)
-- 🔐 Authentification sécurisée
-- 📧 Récupération de mot de passe
+</div>
 
-## ✨ Fonctionnalités
+---
 
-### 🔐 Authentification
-- Inscription / Connexion sécurisée
-- Mot de passe oublié avec code par email
-- Changement de mot de passe
-- Hash SHA-256 des mots de passe
+##  Overview
 
-### 💊 Gestion des médicaments
-- Ajout/modification/suppression de médicaments
-- Informations détaillées (dosage, forme, fréquence)
-- Gestion du stock (alerte stock bas)
-- Instructions de prise personnalisées
-- Médecin prescripteur
+**Medical Reminder App** is a comprehensive solution for medication management and adherence tracking. Users can:
 
-### ⏰ Rappels intelligents
-- Configuration des heures de prise
-- Rappels par email automatiques
-- Activation/désactivation par médicament
-- Suivi des prises (prises/manquées)
+-  Register, manage medication profiles, and set intake schedules
+-  Receive personalized email reminders at scheduled times  
+-  Track adherence with detailed statistics and analytics
+-  View intake history with advanced filtering options
+-  Access the app in French, English, or Arabic (with RTL support)
+-  Enjoy secure authentication with password reset functionality
 
-### 📊 Statistiques et analyses
-- Taux d'adhérence global et par période
-- Évolution temporelle
-- Graphiques interactifs (Chart.js + Recharts)
-- Identification des meilleurs/pires jours
-- Recommandations personnalisées
+Perfect for patients managing chronic conditions, caregivers tracking multiple users, and healthcare providers monitoring patient compliance.
 
-### 📅 Calendrier
-- Vue jour/semaine/mois
-- Historique complet des prises
-- Filtres avancés (statut, période, dates)
-- Export CSV/PDF
+##  Features
 
-### ⚙️ Paramètres
-- Profil utilisateur personnalisable
-- Changement de langue en temps réel
-- Support RTL pour l'arabe
-- Gestion des notifications
+###  **Authentication & Security**
+- User registration with email validation
+- Secure login with JWT token management
+- Password hashing (SHA-256 encryption)
+- Forgot password with email-based reset codes
+- Time-limited password reset tokens (30-minute expiry)
+- Secure session management
 
-## 🛠️ Technologies
+###  **Medication Management**
+- Create, edit, and delete medication profiles
+- Track dosage, drug form, and intake frequency
+- Store prescriber and doctor information
+- Set low stock alerts and reorder reminders
+- Add custom medication instructions and notes
+- Comprehensive medication history
 
-### Frontend
-- **React 18.x** - Interface utilisateur
-- **React Router** - Navigation
-- **i18next** - Internationalisation (FR, EN, AR)
-- **Chart.js & Recharts** - Graphiques
-- **CSS3** - Styling responsive
+###  **Smart Reminder System**
+- Configurable intake times for each medication
+- Automated email reminders via SMTP
+- Individual reminder enable/disable control
+- Real-time notification preferences
+- Scheduled background tasks (APScheduler)
+- Flexible reminder frequency (daily, weekly, custom)
 
-### Backend
-- **Flask 3.1.2** - Framework web Python
-- **MongoDB** - Base de données NoSQL
-- **Flask-Mail** - Envoi d'emails
-- **APScheduler** - Tâches planifiées
-- **python-dotenv** - Variables d'environnement
-- **Flask-CORS** - Gestion CORS
+###  **Analytics & Statistics**
+- Overall medication adherence rates
+- Time-based compliance tracking
+- Interactive charts and visualizations
+- Best/worst performance analysis
+- Personalized health insights and recommendations
+- Data export capabilities
 
-## 📦 Installation
+###  **Calendar & History**
+- Multi-view calendar (day/week/month)
+- Complete intake history repository
+- Advanced filtering (by medication, date range, status)
+- Detailed intake records with timestamps
+- Adherence status visualization
+- Historical data analysis
 
-### Prérequis
-- **Node.js** 16+ et npm
-- **Python** 3.11+
-- **MongoDB** (local ou cloud)
-- Compte **Gmail** avec "Mot de passe d'application"
+###  **User Settings & Preferences**
+- User profile customization
+- Real-time language switching (FR/EN/AR)
+- Right-to-left (RTL) support for Arabic
+- Notification management preferences
+- Personal health information storage
 
-### 1. Cloner le repository
+###  **Multi-Language Support**
+- **Français (FR)** - Complete French interface
+- **English (EN)** - Full English translation
+- **العربية (AR)** - Tunisian Arabic with RTL layout
+- Language auto-detection from browser settings
+- Persistent language preference in localStorage
+
+---
+
+##  Tech Stack
+
+### **Frontend**
+- **React 19.1.1** - Modern UI library with hooks
+- **Vite 7.1.7** - Lightning-fast build tool and dev server
+- **React Router DOM 7.9.4** - Client-side routing
+- **i18next 25.6.0** - Internationalization (i18n)
+- **Chart.js & Recharts 3.3.0** - Data visualization
+- **React Icons 5.5.0** - Icon library
+- **Lottie React 2.4.1** - Smooth animations
+
+### **Backend**
+- **Flask 3.1.2** - Lightweight Python web framework
+- **MongoDB 6** - NoSQL database for flexible data storage
+- **Flask-Mail 0.10.0** - Email sending (SMTP integration)
+- **APScheduler 3.11.0** - Background task scheduling
+- **Flask-CORS 6.0.1** - Cross-origin resource sharing
+- **python-dotenv 1.0.1** - Environment variable management
+
+### **Infrastructure**
+- **Docker & Docker Compose** - Containerization and orchestration
+- **REST API** - RESTful API design pattern
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Ensure you have the following installed:
+- **Node.js** 16+ ([Download](https://nodejs.org/))
+- **Python** 3.11+ ([Download](https://www.python.org/))
+- **MongoDB** 6+ (Local instance or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
+- **Gmail account** with "App Password" for email functionality
+- **Docker** (optional, for containerized setup)
+
+### Quick Start - Option 1: Docker (Recommended)
+
+The easiest way to get up and running:
+
 ```bash
-git clone https://github.com/Fridhi-Rochdi/rminderapp.git
-cd rminderapp
+# Clone the repository
+git clone <your-repo-url>
+cd reminder_app
+
+# Start all services with Docker Compose
+docker-compose up --build
+
+# Access the application
+# Frontend: http://localhost:3000
+# Backend API: http://localhost:5000
+# MongoDB: localhost:27017
 ```
 
-### 2. Installation Backend
+Docker Compose will automatically:
+- Start MongoDB container
+- Build and run the Flask backend
+- Build and run the React frontend
+- Set up network communication between services
+
+### Quick Start - Option 2: Local Development
+
+**Step 1: Backend Setup**
 
 ```bash
 cd backend
 
-# Créer l'environnement virtuel
+# Create and activate virtual environment
 python -m venv venv
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # macOS/Linux
 
-# Activer l'environnement
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-
-# Installer les dépendances
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### 3. Installation Frontend
+# Create .env file with configuration
+echo FLASK_SECRET_KEY=your_secret_key_here > .env
+echo FLASK_ENV=development >> .env
+echo MONGO_URI=mongodb://localhost:27017/medical_reminder >> .env
+echo MAIL_SERVER=smtp.gmail.com >> .env
+echo MAIL_PORT=587 >> .env
+echo MAIL_USERNAME=your.email@gmail.com >> .env
+echo MAIL_PASSWORD=your_app_password >> .env
 
-```bash
-cd ../frontend
-npm install
-```
-
-## 🔧 Configuration
-
-### Backend - Variables d'environnement
-
-1. **Créer le fichier `.env`** dans `backend/`
-```bash
-cd backend
-copy env.example .env
-```
-
-2. **Remplir `.env`** avec vos vraies valeurs :
-
-```env
-# Flask
-FLASK_SECRET_KEY=votre_cle_secrete_ultra_securisee
-FLASK_ENV=development
-FLASK_DEBUG=True
-
-# MongoDB
-MONGO_URI=mongodb://localhost:27017/medical_reminder
-MONGO_DB_NAME=medical_reminder
-
-# Gmail SMTP
-MAIL_SERVER=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USE_TLS=True
-MAIL_USE_SSL=False
-MAIL_USERNAME=votre.email@gmail.com
-MAIL_PASSWORD=xxxx xxxx xxxx xxxx
-MAIL_DEFAULT_SENDER_NAME=Medical Reminder App
-MAIL_DEFAULT_SENDER_EMAIL=votre.email@gmail.com
-
-# Frontend
-FRONTEND_URL=http://localhost:3000
-
-# Tokens
-TOKEN_EXPIRATION_HOURS=24
-RESET_CODE_EXPIRATION_MINUTES=15
-```
-
-### ⚠️ Configuration Gmail SMTP
-
-Pour Gmail, créez un **"Mot de passe d'application"** :
-
-1. Allez sur https://myaccount.google.com/
-2. **Sécurité** → **Validation en deux étapes** (activez-la)
-3. **Sécurité** → **Mots de passe des applications**
-4. Créez un mot de passe pour "Medical Reminder App"
-5. Copiez le mot de passe généré (format : `xxxx xxxx xxxx xxxx`)
-6. Collez-le dans `MAIL_PASSWORD`
-
-## 🚀 Utilisation
-
-### Démarrer MongoDB
-
-```bash
-# Windows (si installé en tant que service)
-net start MongoDB
-
-# Ou démarrez MongoDB manuellement
-mongod
-```
-
-### Démarrer le Backend
-
-```bash
-cd backend
+# Run the backend
 python app.py
+# Server will be available at http://localhost:5000
 ```
-🌐 Backend disponible sur : **http://localhost:5000**
 
-### Démarrer le Frontend
+**Step 2: Frontend Setup**
 
 ```bash
 cd frontend
-npm start
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+# Server will be available at http://localhost:5173 (or configured port)
 ```
-🌐 Frontend disponible sur : **http://localhost:3000**
 
-## 🔒 Sécurité
+### Quick Start - Option 3: PowerShell Script (Windows Only)
 
-### Fichiers sensibles (JAMAIS commit sur Git)
-- ✅ `backend/.env` - Contient les mots de passe et tokens
-- ✅ `backend/venv/` - Environnement virtuel Python
-- ✅ `frontend/node_modules/` - Dépendances Node.js
+For Windows users, use the provided PowerShell script:
 
-### Fichiers safe pour Git
-- ✅ `backend/env.example` - Template sans données sensibles
-- ✅ `backend/.gitignore` - Configuration d'exclusion Git
-- ✅ `frontend/.gitignore` - Configuration d'exclusion Git
+```powershell
+.\start-app.ps1
+```
 
-### Bonnes pratiques
-- 🔐 Mots de passe hashés (SHA-256)
-- 🔑 Codes de réinitialisation à usage unique
-- ⏱️ Expiration automatique des codes (15 min)
-- 🚫 CORS configuré pour le frontend uniquement
-- 📧 "Mot de passe d'application" Gmail (pas le mot de passe principal)
+This script will automatically:
+- Start MongoDB service (if installed locally)
+- Start the Flask backend in a new PowerShell window
+- Start the React frontend in another new PowerShell window
 
-## 🌍 Support multilingue
+---
 
-### Langues supportées
-- 🇫🇷 **Français** (langue par défaut)
-- 🇬🇧 **English**
-- 🇸🇦 **العربية** (Dialecte tunisien avec support RTL)
+##  Environment Configuration
 
-### Changement de langue
-1. Aller dans **Paramètres** (⚙️)
-2. Section "Langue de l'application"
-3. Cliquer sur le drapeau de la langue souhaitée
+Create a `.env` file in the `backend/` directory:
 
-### Support RTL (Right-to-Left)
-L'interface s'adapte automatiquement pour l'arabe :
-- Texte de droite à gauche
-- Navigation inversée
-- Disposition miroir
+```env
+# Flask Configuration
+FLASK_SECRET_KEY=your_very_secure_secret_key_here
+FLASK_ENV=development
+FLASK_APP=app.py
 
-## 📁 Structure du projet
+# MongoDB Configuration
+MONGO_URI=mongodb://localhost:27017/medical_reminder
+MONGO_DB_NAME=medical_reminder
+
+# Email Configuration (Gmail SMTP)
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USERNAME=your.email@gmail.com
+MAIL_PASSWORD=your_app_password  # Use Gmail App Password, not your regular password
+MAIL_DEFAULT_SENDER_EMAIL=your.email@gmail.com
+
+# Frontend Configuration
+FRONTEND_URL=http://localhost:3000
+
+# Token Configuration
+TOKEN_EXPIRATION_HOURS=24
+RESET_CODE_EXPIRATION_MINUTES=30
+
+# APScheduler Configuration
+SCHEDULER_TIMEZONE=UTC
+SCHEDULER_MISFIRE_GRACE_TIME=300
+```
+
+### Setting Up Gmail App Password
+
+1. Go to your [Google Account Security](https://myaccount.google.com/security)
+2. Enable 2-Step Verification if not already enabled
+3. Create an "App Password" for Mail
+4. Use the generated password in `MAIL_PASSWORD`
+
+---
+
+## � Available Scripts
+
+### Frontend Scripts
+
+```bash
+cd frontend
+
+# Start development server with hot reload
+npm run dev
+
+# Build for production
+npm run build
+
+# Run linting (ESLint)
+npm run lint
+
+# Preview production build locally
+npm run preview
+
+# Run tests
+npm test
+```
+
+### Backend Scripts
+
+```bash
+cd backend
+
+# Run the Flask development server
+python app.py
+
+# Run with automatic reload on file changes
+FLASK_ENV=development python app.py
+```
+
+---
+
+##  Docker Commands
+
+```bash
+# Build and start all services
+docker-compose up --build
+
+# Start services in background
+docker-compose up -d
+
+# Stop all services
+docker-compose down
+
+# View logs
+docker-compose logs -f
+
+# View specific service logs
+docker-compose logs -f backend
+docker-compose logs -f frontend
+
+# Rebuild without cache
+docker-compose build --no-cache
+
+# Remove volumes (database data)
+docker-compose down -v
+```
+
+---
+
+## � API Endpoints
+
+### Authentication
+```
+POST   /auth/register           - Register new user
+POST   /auth/login              - Login user
+POST   /auth/forgot-password    - Request password reset code
+POST   /auth/reset-password     - Reset password with code
+```
+
+### Medications
+```
+GET    /medications             - Fetch all user medications
+POST   /medications             - Create new medication
+PUT    /medications/<id>        - Update medication
+DELETE /medications/<id>        - Delete medication
+```
+
+### Reminders
+```
+GET    /reminders               - Fetch user's reminders
+POST   /reminders               - Create reminder
+PUT    /reminders/<id>          - Update reminder
+DELETE /reminders/<id>          - Delete reminder
+```
+
+### History & Statistics
+```
+GET    /history                 - Get intake history
+GET    /statistics              - Get adherence analytics
+POST   /history                 - Log medication intake
+```
+
+---
+
+## 📁 Project Structure
 
 ```
-rminderapp/
-├── backend/
-│   ├── app.py                    # Application Flask
-│   ├── requirements.txt          # Dépendances Python
-│   ├── .env                      # Variables d'environnement (local)
-│   ├── env.example              # Template de configuration
-│   ├── .gitignore               # Exclusions Git
-│   └── README.md                # Documentation backend
+reminder_app/
 │
-├── frontend/
-│   ├── public/
-│   │   ├── index.html
-│   │   └── Medicine.json
+├── 📂 backend/
+│   ├── app.py                 # Flask application entry point
+│   ├── requirements.txt        # Python dependencies
+│   ├── dockerfile             # Backend container configuration
+│   ├── README.md              # Backend-specific documentation
+│   └── [Other Python modules]
+│
+├── 📂 frontend/
 │   ├── src/
-│   │   ├── components/          # Composants React
-│   │   │   ├── Login.js
-│   │   │   ├── Register.js
-│   │   │   ├── Dashboard.js
-│   │   │   ├── MesMedicaments.js
-│   │   │   ├── Rappels.js
-│   │   │   ├── Calendrier.js
-│   │   │   ├── Historique.js
-│   │   │   ├── Statistiques.js
-│   │   │   ├── Parametres.js
-│   │   │   └── LanguageSwitcher.js
-│   │   ├── locales/             # Fichiers de traduction
-│   │   │   ├── fr.json          # Français
-│   │   │   ├── en.json          # English
-│   │   │   └── ar.json          # العربية (tunisien)
-│   │   ├── i18n.js              # Configuration i18n
-│   │   ├── App.js
-│   │   └── index.js
-│   ├── package.json
-│   └── README.md
+│   │   ├── App.js            # Main application component
+│   │   ├── App.css           # Global styles
+│   │   ├── index.js          # React entry point
+│   │   ├── index.css         # Global CSS
+│   │   ├── i18n.js           # i18next configuration
+│   │   ├── config.js         # Application configuration
+│   │   │
+│   │   ├── 📂 components/    # Reusable React components
+│   │   │   ├── Login.js      # Authentication page
+│   │   │   ├── Register.js   # User registration
+│   │   │   ├── Dashboard.js  # Main dashboard layout
+│   │   │   ├── AccueilDashboard.js    # Home/Welcome section
+│   │   │   ├── MesMedicaments.js      # Medication management
+│   │   │   ├── Rappels.js            # Reminders configuration
+│   │   │   ├── Historique.js         # Intake history
+│   │   │   ├── Statistiques.js       # Analytics & charts
+│   │   │   ├── Calendrier.js         # Calendar view
+│   │   │   ├── Parametres.js         # User settings
+│   │   │   ├── LanguageSwitcher.js   # Language toggle
+│   │   │   ├── ForgotPassword.js     # Password recovery
+│   │   │   └── ResetPassword.js      # Password reset
+│   │   │
+│   │   ├── 📂 assets/        # Images, icons, media files
+│   │   │
+│   │   └── 📂 locales/       # Translation files
+│   │       ├── fr.json       # French translations
+│   │       ├── fr_COMPLETE.json
+│   │       ├── en.json       # English translations
+│   │       └── ar.json       # Arabic translations
+│   │
+│   ├── package.json          # npm dependencies and scripts
+│   ├── vite.config.js        # Vite build configuration
+│   ├── eslint.config.js      # ESLint code quality rules
+│   ├── index.html            # HTML entry point
+│   ├── dockerfile            # Frontend container configuration
+│   └── README.md             # Frontend-specific documentation
 │
-└── README.md                     # Ce fichier
+├── docker-compose.yml        # Docker Compose orchestration
+├── start-app.ps1            # PowerShell startup script (Windows)
+└── README.md                # This file!
 ```
 
-## 🗄️ Base de données MongoDB
+---
 
-### Collections
+## 🔐 Security Features
 
-#### `users`
-- Informations utilisateurs
-- Mots de passe hashés
-- Codes de réinitialisation temporaires
+- **Password Hashing**: SHA-256 encryption for all passwords
+- **Token Management**: JWT-like tokens with expiration
+- **CORS Protection**: Configured CORS for safe cross-origin requests
+- **Environment Variables**: Sensitive data stored in `.env`
+- **Email Verification**: Reset codes expire after 30 minutes
+- **Session Management**: Secure login sessions with localStorage tokens
 
-#### `medicaments`
-- Liste des médicaments par utilisateur
-- Dosage, fréquence, stock
-- Instructions de prise
+---
 
-#### `settings`
-- Préférences utilisateur
-- Langue, notifications
-- Informations médicales
+## 🧪 Testing
 
-## 📧 Endpoints API
+The project includes test files for quality assurance:
+- `frontend/src/App.test.js` - Main component tests
+- `frontend/src/App.test.simple.js` - Simple test examples
+- `frontend/src/TestHome.js` - Home component tests
+
+Run tests with:
+```bash
+cd frontend
+npm test
+```
+
+---
+
+## 📖 Documentation
+
+- [Backend Documentation](backend/README.md) - Detailed backend setup and API documentation
+- [Frontend Documentation](frontend/README.md) - Frontend architecture and component guide
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how to get started:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Make your changes** and test thoroughly
+4. **Commit your changes**: `git commit -m 'Add amazing feature'`
+5. **Push to the branch**: `git push origin feature/amazing-feature`
+6. **Open a Pull Request** with a clear description of your changes
+
+### Code Style
+
+- Follow JavaScript/React conventions (use Prettier if configured)
+- Follow Python PEP 8 style guide
+- Write clear, descriptive commit messages
+- Add comments for complex logic
+- Test your code before submitting PR
+
+---
+
+## 🐛 Troubleshooting
+
+### MongoDB Connection Issues
+- Ensure MongoDB is running: `mongod`
+- Check `MONGO_URI` in `.env` matches your setup
+- For MongoDB Atlas, ensure IP whitelist includes your address
+
+### Email Not Sending
+- Verify Gmail App Password (not regular password) is used
+- Enable "Less secure app access" if not using App Password
+- Check `MAIL_SERVER` and `MAIL_PORT` settings
+- Ensure `MAIL_USERNAME` matches the email sending from
+
+### Frontend Port Already in Use
+- Change port in `vite.config.js`: `{ server: { port: 3001 } }`
+- Or kill the process: `lsof -ti:3000 | xargs kill -9` (macOS/Linux)
+
+### Docker Issues
+- Rebuild without cache: `docker-compose build --no-cache`
+- Remove old volumes: `docker-compose down -v`
+- Check logs: `docker-compose logs -f`
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👥 Authors & Contributors
+
+- **Developer**: Created with ❤️ for medication adherence
+
+---
+
+## 📞 Support & Contact
+
+For issues, questions, or suggestions:
+- Open an [Issue](../../issues) on GitHub
+- Create a [Discussion](../../discussions) for questions
+- Check existing documentation for common problems
+
+---
+
+## 🙏 Acknowledgments
+
+- React and Vite communities
+- Flask and Python communities
+- MongoDB for reliable data storage
+- i18next for translation support
+- All contributors and users who help improve this project
+
+---
+
+<div align="center">
+
+### Made with ❤️ for better medication adherence
+
+[⬆ Back to top](#-medical-reminder-app)
+
+</div>
 
 ### Authentication
 - `POST /auth/register` - Créer un compte

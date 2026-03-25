@@ -222,21 +222,17 @@ const Rappels = () => {
 
   return (
     <div className="rappels">
-      {/* Header */}
       <div className="rappels-header">
-        <div className="header-top">
-          <h1>⏰ {t('reminders.title')}</h1>
           <button className="btn-add-rappel" onClick={handleAdd}>
             + {t('reminders.addReminder')}
           </button>
-        </div>
       </div>
 
       {/* Statistiques */}
       <div className="rappels-stats">
         <div className="stat-card">
           <div className="stat-number">{stats.total}</div>
-          <div className="stat-label">{t('common.total')} {t('dashboard.remindersCount')}</div>
+          <div className="stat-label">{t('total')} {t('dashboard.remindersCount')}</div>
         </div>
         <div className="stat-card">
           <div className="stat-number">{stats.actifs}</div>
@@ -248,16 +244,14 @@ const Rappels = () => {
         </div>
         <div className="stat-card">
           <div className="stat-number">{stats.prochains24h}</div>
-          <div className="stat-label">{t('common.next')} 24h</div>
+          <div className="stat-label"> 24h</div>
         </div>
       </div>
 
       {/* Tableau des rappels */}
       <div className="rappels-list">
-        <h3>📋 {t('reminders.title')}</h3>
         {rappels.length === 0 ? (
           <div className="no-rappels">
-            <div className="no-rappels-icon">⏰</div>
             <h4>{t('common.noData')}</h4>
             <p>{t('reminders.addReminder')}</p>
             <button className="btn-add-first" onClick={handleAdd}>
@@ -271,10 +265,7 @@ const Rappels = () => {
                 <tr>
                   <th>{t('reminders.medication')}</th>
                   <th>{t('reminders.times')}</th>
-                  <th>{t('reminders.days')}</th>
-                  <th>{t('common.next')}</th>
-                  <th>{t('reminders.sound')}</th>
-                  <th>{t('reminders.vibration')}</th>
+                  <th>{t('reminders.days')}</th> 
                   <th>{t('common.status')}</th>
                   <th>{t('medications.actions')}</th>
                 </tr>
@@ -290,17 +281,6 @@ const Rappels = () => {
                     </td>
                     <td className="jours-cell">
                       {rappel.jours.join(', ')}
-                    </td>
-                    <td className="prochain-cell">
-                      {formatProchainRappel(rappel.prochainRappel)}
-                    </td>
-                    <td className="son-cell">
-                      <span className="option-icon">{rappel.son ? '🔊' : '🔇'}</span>
-                      <span className="option-text">{t('reminders.sound')}</span>
-                    </td>
-                    <td className="vibration-cell">
-                      <span className="option-icon">{rappel.vibration ? '📳' : '📴'}</span>
-                      <span className="option-text">{t('reminders.vibration')}</span>
                     </td>
                     <td className="statut-cell">
                       <span className={`statut-badge ${rappel.actif ? 'actif' : 'inactif'}`}>
