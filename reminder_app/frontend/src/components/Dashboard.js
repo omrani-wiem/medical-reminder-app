@@ -39,13 +39,13 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
   }, [activeTab]);
 
   const menuItems = [
-    { id: 'accueil', icon: <FiHome />, label: t('nav.home'), path: '/dashboard' },
-    { id: 'medicaments', icon: <FiPackage />, label: t('nav.medications'), path: '/medicaments' },
-    { id: 'rappels', icon: <FiBell />, label: t('nav.reminders'), path: '/rappels' },
-    { id: 'historique', icon: <FiClipboard />, label: t('nav.history'), path: '/historique' },
-    { id: 'statistiques', icon: <FiBarChart2 />, label: t('nav.statistics'), path: '/statistiques' },
-    { id: 'contacts', icon: <FiUsers />, label: t('nav.contacts'), path: '/contacts' },
-    { id: 'parametres', icon: <FiSettings />, label: t('nav.settings'), path: '/parametres' }
+    { id: 'accueil', icon: <FiHome />, label: t('nav.home') },
+    { id: 'medicaments', icon: <FiPackage />, label: t('nav.medications') },
+    { id: 'rappels', icon: <FiBell />, label: t('nav.reminders') },
+    { id: 'historique', icon: <FiClipboard />, label: t('nav.history') },
+    { id: 'statistiques', icon: <FiBarChart2 />, label: t('nav.statistics') },
+    { id: 'contacts', icon: <FiUsers />, label: t('nav.contacts') },
+    { id: 'parametres', icon: <FiSettings />, label: t('nav.settings') }
   ];
   const handleMenuClick = (itemId) => {
     setActiveTab(itemId);

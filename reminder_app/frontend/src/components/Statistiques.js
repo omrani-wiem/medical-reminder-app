@@ -288,7 +288,6 @@ const Statistiques = () => {
         label: 'Taux d\'adhérence (%)',
         data: donneesAdherence.map(d => d.adherence),
         backgroundColor: 'rgba(52, 152, 219, 0.2)',
-        borderColor: 'rgba(52, 152, 219, 1)',
         borderWidth: 3,
         fill: true,
         tension: 0.4,
