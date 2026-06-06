@@ -27,6 +27,12 @@ function AjoutMedicament() {
     }));
   };
 
+
+  const gotToMedicaments = () => {
+    localStorage.setItem('dashboardActiveTab', 'medicaments');
+    navigate('/dashboard');
+  };
+
    const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,7 +85,7 @@ function AjoutMedicament() {
 
       if (response.ok) {
         alert('Médicament ajouté avec succès !');
-        navigate('/dashboard/medicaments');
+        gotToMedicaments(); 
       } else {
         alert(data.error || 'Erreur lors de l\'ajout du médicament');
       }
@@ -272,7 +278,7 @@ function AjoutMedicament() {
             <button
               type="button"
               className="btn-cancel"
-              onClick={() => navigate('/dashboard/medicaments')}
+              onClick={() => gotToMedicaments()}
             >
               Annuler
             </button>
