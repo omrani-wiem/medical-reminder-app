@@ -1,37 +1,21 @@
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+// LanguageSwitcher.js
+import React from 'react';
+import { useLanguageSwitcher } from '../hooks/useLanguageSwitcher';
+import { LANGUAGES } from '../utils/languageUtils';
 import './LanguageSwitcher.css';
 
 const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
-
-  useEffect(() => {
-    
-    document.documentElement.setAttribute(
-      'dir',
-      i18n.language === 'ar' ? 'rtl' : 'ltr'
-    );
-  }, [i18n.language]);
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem('langue', lng);
-  };
-
-  const languages = [
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' }
-  ];
+  const { currentLanguage, changeLanguage } = useLanguageSwitcher();
+  const currentLang = LANGUAGES.find(l => l.code === currentLanguage);
 
   return (
     <div className="language-switcher">
       <div className="language-buttons">
-        {languages.map((lang) => (
+        {LANGUAGES.map(lang => (
           <button
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
-            className={`language-btn ${i18n.language === lang.code ? 'active' : ''}`}
+            className={`language-btn ${currentLanguage === lang.code ? 'active' : ''}`}
             title={lang.name}
           >
             <span className="language-flag">{lang.flag}</span>
@@ -39,13 +23,11 @@ const LanguageSwitcher = () => {
           </button>
         ))}
       </div>
-      
+
       <div className="current-language">
         <span className="current-label">Langue actuelle :</span>
         <span className="current-value">
-          {languages.find(l => l.code === i18n.language)?.flag}
-          {' '}
-          {languages.find(l => l.code === i18n.language)?.name}
+          {currentLang?.flag} {currentLang?.name}
         </span>
       </div>
     </div>
@@ -53,5 +35,3 @@ const LanguageSwitcher = () => {
 };
 
 export default LanguageSwitcher;
-
-

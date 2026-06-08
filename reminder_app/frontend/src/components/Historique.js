@@ -1,199 +1,15 @@
-import React, { useState, useEffect } from 'react';
+// Historique.js
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useHistorique } from '../hooks/useHistorique';
 import './Historique.css';
 
 const Historique = () => {
   const { t } = useTranslation();
-  const [historique, setHistorique] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filtres, setFiltres] = useState({
-    recherche: '',
-    periode: '7j',
-    dateDebut: '',
-    dateFin:'',
-  });
+  const { donneesFiltrees, stats, loading, error, filtres, handleFiltreChange, exporter } = useHistorique();
 
-  useEffect(() => {
-    fetchHistorique();
-  }, []);
-  const fetchHistorique = async () => {
-    try {
-      setLoading(true);
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      const response = await fetch(`http://localhost:5000/medicaments?email=${user.email}`);
-      
-      if (response.ok) {
-        const medicaments = await response.json();
-        
-        const historiqueGenere = generateHistoriqueFromMedicaments(medicaments);
-        setHistorique(historiqueGenere);
-      } else {
-        console.error('Erreur lors de la récupération de l\'historique');
-      }
-    } catch (error) {
-      console.error('Erreur:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const generateHistoriqueFromMedicaments = (medicaments) => {
-    const historique = [];
-    let idCounter = 1;
-
-    for (let i = 30; i >= 0; i--) {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-      const dateStr = date.toISOString().split('T')[0];
-      
-      medicaments.forEach(med => {
-        const heures = med.heures_prise || ['08:00'];
-        heures.forEach(heure => {
-             const isPris = Math.random() > 0.2;
-          const retard = isPris ? Math.floor(Math.random() * 30) - 10 : null;
-          
-          historique.push({
-            id: idCounter++,
-            medicament: `${med.nom} ${med.dosage || ''}`,
-            date: dateStr,
-            heure: heure,
-            statut: isPris ? 'pris' : 'manque',
-            dosage: med.dosage || '500mg',
-            forme: med.forme || 'Comprimé',
-            priseEffective: isPris ? addMinutes(heure, retard) : null,
-            retard: isPris ? retard : null,
-            medecin: 'Dr. Martin',
-            notes: isPris ? (retard > 10 ? 'Léger retard' : 'À l\'heure') : 'Oublié'
-          });
-        });
-      });
-    }
-    
-    return historique;
-  };
-
-  // Ajouter des minutes à une heure
-  const addMinutes = (timeStr, minutes) => {
-    const [hours, mins] = timeStr.split(':').map(Number);
-    const totalMinutes = hours * 60 + mins + minutes;
-    const newHours = Math.floor(totalMinutes / 60) % 24;
-    const newMins = totalMinutes % 60;
-    return `${String(newHours).padStart(2, '0')}:${String(newMins).padStart(2, '0')}`;
-  };
-
-  const handleFiltreChange = (e) => {
-    const { name, value } = e.target;
-    setFiltres(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const filtrerHistorique = () => {
-    let historiqueFiltré = [...historique];
-
-    // Filtre par recherche
-    if (filtres.recherche) {
-      historiqueFiltré = historiqueFiltré.filter(item =>
-        item.medicament.toLowerCase().includes(filtres.recherche.toLowerCase()) ||
-        item.medecin.toLowerCase().includes(filtres.recherche.toLowerCase()) ||
-        (item.notes && item.notes.toLowerCase().includes(filtres.recherche.toLowerCase()))
-      );
-    }
-
-    // Filtre par statut
-    if (filtres.statut !== 'tous') {
-      historiqueFiltré = historiqueFiltré.filter(item => item.statut === filtres.statut);
-    }
-
-    // Filtre par période
-    if (filtres.periode !== 'tous') {
-      const aujourdhui = new Date();
-      let dateLimit;
-      
-      switch (filtres.periode) {
-        case '7j':
-          dateLimit = new Date(aujourdhui.getTime() - 7 * 24 * 60 * 60 * 1000);
-          break;
-        case '30j':
-          dateLimit = new Date(aujourdhui.getTime() - 30 * 24 * 60 * 60 * 1000);
-          break;
-        case '90j':
-          dateLimit = new Date(aujourdhui.getTime() - 90 * 24 * 60 * 60 * 1000);
-          break;
-        default:
-          dateLimit = null;
-      }
-
-      if (dateLimit) {
-        historiqueFiltré = historiqueFiltré.filter(item =>
-          new Date(item.date) >= dateLimit
-        );
-      }
-    }
-
-    // Filtre par plage de dates personnalisée
-    if (filtres.dateDebut) {
-      historiqueFiltré = historiqueFiltré.filter(item =>
-        new Date(item.date) >= new Date(filtres.dateDebut)
-      );
-    }
-
-    if (filtres.dateFin) {
-      historiqueFiltré = historiqueFiltré.filter(item =>
-        new Date(item.date) <= new Date(filtres.dateFin)
-      );
-    }
-
-    return historiqueFiltré.sort((a, b) => new Date(b.date + ' ' + b.heure) - new Date(a.date + ' ' + a.heure));
-  };
-
-  const exporterHistorique = (format) => {
-    const donneesFiltrées = filtrerHistorique();
-    
-    if (format === 'csv') {
-      const headers = ['Date', 'Heure', 'Médicament', 'Dosage', 'Statut', 'Prise Effective', 'Retard', 'Médecin', 'Notes'];
-      const csvContent = [
-        headers.join(','),
-        ...donneesFiltrées.map(item => [
-          item.date,
-          item.heure,
-          item.medicament,
-          item.dosage,
-          item.statut,
-          item.priseEffective || '-',
-          item.retard ? `${item.retard}min` : '-',
-          item.medecin,
-          item.notes || '-'
-        ].join(','))
-      ].join('\\n');
-
-      const blob = new Blob([csvContent], { type: 'text/csv' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `historique-medicaments-${new Date().toISOString().split('T')[0]}.csv`;
-      a.click();
-    } else if (format === 'pdf') {
-      alert('Export PDF en développement');
-    }
-  };
-
-  const calculerStatistiques = () => {
-    const donneesFiltrées = filtrerHistorique();
-    const total = donneesFiltrées.length;
-    const pris = donneesFiltrées.filter(item => item.statut === 'pris').length;
-    const manques = donneesFiltrées.filter(item => item.statut === 'manque').length;
-    const adherence = total > 0 ? Math.round((pris / total) * 100) : 0;
-    const retardMoyen = donneesFiltrées
-      .filter(item => item.statut === 'pris' && item.retard !== null)
-      .reduce((acc, item, _, arr) => acc + item.retard / arr.length, 0);
-
-    return { total, pris, manques, adherence, retardMoyen: Math.round(retardMoyen) };
-  };
-
-  const stats = calculerStatistiques();
-  const donneesFiltrées = filtrerHistorique();
+  if (loading) return <div>Chargement...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="historique">
@@ -208,7 +24,7 @@ const Historique = () => {
           <div className="stat-number">{stats.total}</div>
           <div className="stat-label">{t('total Doses')}</div>
         </div>
-        <div className="stat-card danger" >
+        <div className="stat-card danger">
           <div className="stat-number">{stats.manques}</div>
           <div className="stat-label">{t('missed Doses')}</div>
         </div>
@@ -222,95 +38,61 @@ const Historique = () => {
         </div>
       </div>
 
-      {/* Filtres et recherche */}
+      {/* Filtres */}
       <div className="historique-filtres">
         <div className="filtres-row">
           <div className="filtre-group">
             <label>{t('history.search')}</label>
-            <input
-              type="text"
-              name="recherche"
-              value={filtres.recherche}
-              onChange={handleFiltreChange}
-              placeholder={t('search')}
-              className="filtre-input"
-            />
+            <input type="text" name="recherche" value={filtres.recherche}
+              onChange={handleFiltreChange} placeholder={t('search')} className="filtre-input" />
           </div>
-
           <div className="filtre-group">
             <label>{t('history.status')}</label>
-            <select
-              name="statut"
-              value={filtres.statut}
-              onChange={handleFiltreChange}
-              className="filtre-select"
-            >
+            <select name="statut" value={filtres.statut}
+              onChange={handleFiltreChange} className="filtre-select">
               <option value="tous">{t('history.allStatus')}</option>
               <option value="pris">{t('history.successfulDoses')}</option>
               <option value="manque">{t('history.missedDoses')}</option>
             </select>
           </div>
-
           <div className="filtre-group">
             <label>{t('period')}</label>
-            <select
-              name="periode"
-              value={filtres.periode}
-              onChange={handleFiltreChange}
-              className="filtre-select"
-            >
+            <select name="periode" value={filtres.periode}
+              onChange={handleFiltreChange} className="filtre-select">
               <option value="7j">{t('last7Days')}</option>
               <option value="30j">{t('last30Days')}</option>
               <option value="90j">{t('last3Months')}</option>
               <option value="tous">{t('allPeriod')}</option>
             </select>
           </div>
-
           <div className="filtre-group">
             <label>{t('start Date')}</label>
-            <input
-              type="date"
-              name="dateDebut"
-              value={filtres.dateDebut}
-              onChange={handleFiltreChange}
-              className="filtre-input"
-            />
+            <input type="date" name="dateDebut" value={filtres.dateDebut}
+              onChange={handleFiltreChange} className="filtre-input" />
           </div>
-
           <div className="filtre-group">
             <label>{t('end Date')}</label>
-            <input
-              type="date"
-              name="dateFin"
-              value={filtres.dateFin}
-              onChange={handleFiltreChange}
-              className="filtre-input"
-            />
+            <input type="date" name="dateFin" value={filtres.dateFin}
+              onChange={handleFiltreChange} className="filtre-input" />
           </div>
         </div>
 
         <div className="actions-row">
           <div className="resultats-info">
-            {donneesFiltrées.length} {t('results Found', { count: donneesFiltrées.length })}
+            {donneesFiltrees.length} {t('results Found', { count: donneesFiltrees.length })}
           </div>
           <div className="export-buttons">
-            <button
-              onClick={() => exporterHistorique('csv')}
-              className="btn-export"
-            >
+            <button onClick={() => exporter('csv')} className="btn-export">
               {t('history.exportCSV')}
             </button>
-            <button
-              onClick={() => exporterHistorique('pdf')}
-              className="btn-export"
-            >
+            <button onClick={() => exporter('pdf')} className="btn-export">
               {t('history.exportPDF')}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Tableau de l'historique */}
+      {/* Tableau */}
       <div className="historique-table-container">
         <table className="historique-table">
           <thead>
@@ -327,7 +109,7 @@ const Historique = () => {
             </tr>
           </thead>
           <tbody>
-            {donneesFiltrées.length === 0 ? (
+            {donneesFiltrees.length === 0 ? (
               <tr>
                 <td colSpan="9" className="no-data">
                   <div className="no-data-content">
@@ -337,27 +119,23 @@ const Historique = () => {
                 </td>
               </tr>
             ) : (
-              donneesFiltrées.map(item => (
+              donneesFiltrees.map(item => (
                 <tr key={item.id} className={`historique-row ${item.statut}`}>
                   <td className="date-cell">
                     {new Date(item.date).toLocaleDateString('fr-FR')}
                   </td>
                   <td className="heure-cell">{item.heure}</td>
-                  <td className="medicament-cell">
-                    <strong>{item.medicament}</strong>
-                  </td>
+                  <td className="medicament-cell"><strong>{item.medicament}</strong></td>
                   <td className="dosage-cell">
                     <div>{item.dosage}</div>
                     <div className="forme-info">{item.forme}</div>
                   </td>
                   <td className="statut-cell">
                     <span className={`statut-badge ${item.statut}`}>
-                      {item.statut === 'pris' ? `✅ ${t('history.taken')}` : `❌ ${t('history.missed')}`}
+                      {item.statut === 'pris' ? ` ${t('history.taken')}` : ` ${t('history.missed')}`}
                     </span>
                   </td>
-                  <td className="prise-effective-cell">
-                    {item.priseEffective || '-'}
-                  </td>
+                  <td className="prise-effective-cell">{item.priseEffective || '-'}</td>
                   <td className="retard-cell">
                     {item.retard !== null ? (
                       <span className={`retard-badge ${item.retard > 0 ? 'retard' : item.retard < 0 ? 'avance' : 'ponctuel'}`}>
@@ -380,5 +158,3 @@ const Historique = () => {
 };
 
 export default Historique;
-
-

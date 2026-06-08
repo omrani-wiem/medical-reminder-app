@@ -1,84 +1,48 @@
-import React, { useState, useEffect } from 'react';
+// Dashboard.js
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { FiActivity, FiLogOut } from 'react-icons/fi';
+import { useDashboard } from '../hooks/useDashboard';
+import { getMenuItems } from '../utils/dashboardMenuItems';
+import DashboardContent from './dashboard/DashboardContent';
 import './Dashboard.css';
-import {
-     FiHome, 
-  FiPackage,
-  FiBell,
-  FiClipboard,
-  FiBarChart2,
-  FiUsers,
-  FiSettings,
-  FiLogOut,
-  FiUser,
-  FiActivity,
-  FiMenu,
-  FiChevronLeft
-} from 'react-icons/fi';
 
-import AccueilDashboard from './AccueilDashboard';
-import MesMedicaments from './MesMedicaments';
-import Calendrier from './Calendrier';
-import Rappels from './Rappels';
-import Parametres from './Parametres';
-import Historique from './Historique';
-import Statistiques from './Statistiques';
-
-const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
+const Dashboard = ({ onLogout }) => {
   const { t } = useTranslation();
-  
- 
-  const [activeTab, setActiveTab] = useState(() => {
-    return localStorage.getItem('dashboardActiveTab') || 'accueil';
-  });
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  
-  // Sauvegarder l'onglet actif à chaque changement
-  useEffect(() => {
-    localStorage.setItem('dashboardActiveTab', activeTab);
-  }, [activeTab]);
-
-  const menuItems = [
-    { id: 'accueil', icon: <FiHome />, label: t('nav.home') },
-    { id: 'medicaments', icon: <FiPackage />, label: t('nav.medications') },
-    { id: 'rappels', icon: <FiBell />, label: t('nav.reminders') },
-    { id: 'historique', icon: <FiClipboard />, label: t('nav.history') },
-    { id: 'statistiques', icon: <FiBarChart2 />, label: t('nav.statistics') },
-    { id: 'contacts', icon: <FiUsers />, label: t('nav.contacts') },
-    { id: 'parametres', icon: <FiSettings />, label: t('nav.settings') }
-  ];
-  const handleMenuClick = (itemId) => {
-    setActiveTab(itemId);
-  };
+  const { activeTab, sidebarCollapsed, handleMenuClick, toggleSidebar } = useDashboard();
+  const menuItems = getMenuItems(t);
 
   return (
     <div className="dashboard-container">
-        {/*sidebar*/}
-        <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-header">
-            <div className="logo">
-                <span className="logo-icon"><FiActivity /></span>
-                {!sidebarCollapsed && <span className="logo-text">MedReminder</span>}
-            </div>
+          <div className="logo">
+            <span className="logo-icon"><FiActivity /></span>
+            {!sidebarCollapsed && <span className="logo-text">MedReminder</span>}
+          </div>
         </div>
+
         <nav className="sidebar-nav">
-            <ul className="nav-list">
-                {menuItems.map((item) => (
-                    <li key={item.id} className="nav-item">
-                        <button
-                            className={`nav-link ${activeTab === item.id ? 'active' : ''}`}
-                            onClick={() => handleMenuClick(item.id)}
-                            title={sidebarCollapsed ? item.label : ''}
-                        >
-                            <span className="nav-icon">{item.icon}</span>
-                            {!sidebarCollapsed && <span className="nav-label">{item.label}</span>}
-                        </button>
-                    </li>
-                ))}
-            </ul>
+          <ul className="nav-list">
+            {menuItems.map(item => (
+              <li key={item.id} className="nav-item">
+                <button
+                  className={`nav-link ${activeTab === item.id ? 'active' : ''}`}
+                  onClick={() => handleMenuClick(item.id)}
+                  title={sidebarCollapsed ? item.label : ''}
+                >
+                  <span className="nav-icon">{item.icon}</span>
+                  {!sidebarCollapsed && <span className="nav-label">{item.label}</span>}
+                </button>
+              </li>
+            ))}
+          </ul>
         </nav>
+
         <div className="sidebar-footer">
-            <button 
+          <button
             className="logout-btn"
             onClick={onLogout}
             title={sidebarCollapsed ? t('nav.logout') : ''}
@@ -89,16 +53,16 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
         </div>
       </aside>
 
-        {/*main content*/}
-        <main className="main-content">
-            <header className="main-header">
-                <div className="header-left">
-                    <h1 className="page-title">
-                        {menuItems.find(item => item.id === activeTab)?.label || t('nav.home')}
-                    </h1>
-                    <div className="breadcrumb">{/*fil d'Ariane*/}
+      {/* Main content */}
+      <main className="main-content">
+        <header className="main-header">
+          <div className="header-left">
+            <h1 className="page-title">
+              {menuItems.find(item => item.id === activeTab)?.label || t('nav.home')}
+            </h1>
+            <div className="breadcrumb">
               <span>{t('nav.dashboard')}</span>
-              <span className="breadcrumb-separator">›</span>{/*séparateur*/}
+              <span className="breadcrumb-separator">›</span>
               <span>{menuItems.find(item => item.id === activeTab)?.label}</span>
             </div>
           </div>
@@ -109,9 +73,8 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
                 <span className="notification-badge">3</span>
               </button>
               <div className="current-time">
-                {new Date().toLocaleTimeString('fr-FR', { 
-                  hour: '2-digit', 
-                  minute: '2-digit' 
+                {new Date().toLocaleTimeString('fr-FR', {
+                  hour: '2-digit', minute: '2-digit'
                 })}
               </div>
             </div>
@@ -119,56 +82,12 @@ const Dashboard = ({ onLogout, currentUser = 'Utilisateur' }) => {
         </header>
 
         <div className="content-area">
-          <DefaultDashboardContent activeTab={activeTab} />
+          <DashboardContent activeTab={activeTab} />
         </div>
       </main>
+
     </div>
   );
 };
-
-
-const DefaultDashboardContent = ({ activeTab }) => {
-    switch (activeTab) {
-        case 'accueil':
-            return <AccueilContent />;
-        case 'medicaments':
-            return <MedicamentsContent />;
-        case 'calendrier':
-            return <CalendrierContent />;
-        case 'rappels':
-            return <RappelsContent />;
-         case 'historique':
-        return <HistoriqueContent />;
-      case 'statistiques':
-        return <StatistiquesContent />;
-      case 'contacts':
-        return <ContactsContent />;
-      case 'parametres':
-        return <ParametresContent />;
-      default:
-        return <AccueilContent />;
-    }
-};
-
-const AccueilContent = () => <AccueilDashboard />;
-const MedicamentsContent = () => <MesMedicaments />;
-const CalendrierContent = () => <Calendrier />;
-const RappelsContent = () => <Rappels />;
-
-const HistoriqueContent = () => <Historique />;
-
-const StatistiquesContent = () => <Statistiques />;
-
-const ContactsContent = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="dashboard-section">
-      <h2>{t('nav.contacts')} 👨‍⚕️</h2>
-      <p>{t('dashboard.subtitle')}</p>
-    </div>
-  );
-};
-
-const ParametresContent = () => <Parametres />;
 
 export default Dashboard;
