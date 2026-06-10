@@ -119,6 +119,17 @@ const MesMedicaments = () => {
                     onChange={handleInputChange} required />
                 </div>
               </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Heure de prise</label>
+                  <input
+                      type="time"
+                      name="prochainePrise"
+                      value={formData.prochainePrise || '08:00'}
+                      onChange={handleInputChange}
+                  />
+                </div>
+              </div>
 
               <div className="form-row">
                 <div className="form-group">
@@ -220,7 +231,7 @@ const MesMedicaments = () => {
                         {stockStatus === 'normal' && '🟢 Stock OK'}
                       </div>
                     </td>
-                    <td>{medicament.prochainePrise || '-'}</td>
+                    <td>{medicament.heure || '-'}</td>
                     <td><div className="instructions-text-table">{medicament.instructions || '-'}</div></td>
                     <td>
                       <button className="btn-edit-table" onClick={() => handleEdit(medicament)} title="Modifier">✏️</button>

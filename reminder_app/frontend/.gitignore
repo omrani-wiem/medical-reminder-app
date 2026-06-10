@@ -23,9 +23,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # Ignorer environnents virtuels
-venv/
 backend/venv/
-
+venv/
+node_modules/
+.env
 # Ignorer dépendances Node
 frontend/node_modules/
 

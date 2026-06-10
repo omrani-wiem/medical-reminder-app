@@ -1,7 +1,7 @@
 // AjoutMedicament.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAjoutMedicament } from '../hooks/useAjoutMedicament';
+import { useAjouterMedicament } from '../hooks/useAjoutMedicament';
 import { FORMES_MEDICAMENT, FREQUENCES_MEDICAMENT } from '../utils/medicamentUtils';
 import './AjoutMedicament.css';
 
