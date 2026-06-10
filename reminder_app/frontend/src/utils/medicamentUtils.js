@@ -11,11 +11,6 @@ export const FREQUENCES_MEDICAMENT = [
 ];
 
 
-export const getHistoriquePrises = asyns (email) => {
-  const { data } = await api.get((`/prises?email=${encodeURIComponent(email)}`);
-  return data;
-};
-
 export const marquerPrise = async (priseId, heuresPrise) => {
    const { data } = await api.patch(`/prises/${priseId}`, {
     statut: 'pris',
@@ -26,7 +21,8 @@ export const marquerPrise = async (priseId, heuresPrise) => {
 
 export const FORM_INITIAL = {
   nom: '', dosage: '', forme: 'Comprimé', couleur: '',
-  frequence: '', duree: '', stock: '', stockMin: '',
+  frequence: '1x/jour',  // ← valeur par défaut
+  duree: '', stock: '', stockMin: '',
   medecin: '', dateDebut: '', dateFin: '', instructions: ''
 };
 

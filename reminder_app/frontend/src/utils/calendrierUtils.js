@@ -1,39 +1,37 @@
+// utils/calendrierUtils.js
+
 const COLORS = ['#3498db', '#27ae60', '#f39c12', '#9b59b6', '#e74c3c'];
 
-export const getRandomColor = () =>
-    COLORS[[Math.floor(Math.random() * COLORS.length)]];
+// ✅ couleur déterministe basée sur l'index — pas de random
+export const getColorForMed = (index) => COLORS[index % COLORS.length];
 
-export const generateScheduleFormMedicaments = (medicaments) =>  {
-    const schedule = {};
-    let idCounter =1;
+export const generateScheduleFromMedicaments = (medicaments) => {
+  const schedule = [];
+  let idCounter = 1;
 
+  for (let i = 0; i < 30; i++) {
+    const date = new Date();
+    date.setDate(date.getDate() + i);
+    const dateStr = date.toISOString().split('T')[0];
 
-    for (let i = 0; i< 30; i++) {
-        const date = new Date();
-        date.setDate(date.getDate() + i);
-        const dateStr = date.toISOString().split('T')[0];
-        
-
-        medicaments.forEach(med => {
-            const heures = med.heures_prise || ['08:00'];
-            heures.forEach(heure => {
-                schedule.push({
-                     id: idCounter++,
-                     medicament: `${med.nom} ${med.dosage || ''}`.trim(),
-                     heure,
-                     date: dateStr,
-                     pris: false,
-                     couleur: getRandomColor()
-
-                });
-            });
+    medicaments.forEach((med, medIndex) => {
+      const heures = med.heures_prise || ['08:00'];
+      heures.forEach(heure => {
+        schedule.push({
+          id: idCounter++,
+          medicament: `${med.nom} ${med.dosage || ''}`.trim(),
+          heure,
+          date: dateStr,
+          pris: false,
+          // ✅ couleur fixe basée sur l'index du médicament
+          couleur: getColorForMed(medIndex)
         });
+      });
+    });
+  }
 
-    }
-
-    return schedule;
+  return schedule;
 };
-
 
 export const getDaysInMonth = (currentDate) => {
   const year = currentDate.getFullYear();
@@ -42,7 +40,7 @@ export const getDaysInMonth = (currentDate) => {
   const startCalendar = new Date(firstDay);
   startCalendar.setDate(startCalendar.getDate() - firstDay.getDay());
 
-    const days = [];
+  const days = [];
   const endCalendar = new Date(startCalendar);
   endCalendar.setDate(endCalendar.getDate() + 42);
 
@@ -65,7 +63,6 @@ export const getWeekDays = (currentDate) => {
   });
 };
 
-
 export const getMedicationsForDate = (schedule, date) => {
   const dateStr = date.toISOString().split('T')[0];
   return schedule.filter(med => med.date === dateStr);
@@ -82,5 +79,3 @@ export const isToday = (date) =>
 
 export const isCurrentMonth = (date, currentDate) =>
   date.getMonth() === currentDate.getMonth();
-
-

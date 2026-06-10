@@ -1,4 +1,4 @@
-export const FROM_INITIAL = {
+export const FORM_INITIAL = {
      nom: '', prenom: '', email: '',
   telephone: '', dateNaissance: '', adresse: '',
   theme: 'clair', langue: 'fr', timezone: 'Europe/Paris',
