@@ -1,20 +1,23 @@
-// hooks/useStatistiques.js
+
 import { useState, useEffect, useMemo } from 'react';
-import { getMedicaments } from '../services/medicamentService';
+import { getStatistiques } from '../services/statistiquesService';
 import {
-  generateDonneesAdherence,
-  generateDonneesTemporelles,
-  generateDonneesRepartition,
-  generateDonneesMedicaments,
-  generateDonneesHeures,
-  calculateGlobalStats,
   buildChartJsAdherenceData,
   buildChartJsBarData,
   buildChartJsDoughnutData
 } from '../utils/statistiquesUtils';
 
 export const useStatistiques = () => {
-  const [medicaments, setMedicaments] = useState([]);
+  const [stats, setStats] = useState({
+  adherenceGlobale: 0,
+  prisesReussies: 0,
+  prisesManquees: 0,
+  prisesRetard: 0,
+  donneesAdherence: [],
+  donneesMedicaments: [],
+  donneesRepartition: [],
+  donneesTemporelles: []
+});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [periode, setPeriode] = useState('30j');
@@ -26,38 +29,42 @@ export const useStatistiques = () => {
         setLoading(true);
         const user = JSON.parse(localStorage.getItem('user') || '{}');
         if (!user?.email) { setError('Utilisateur non connecté'); return; }
-        const data = await getMedicaments(user.email);
-        setMedicaments(data || []);
+
+        const data = await getStatistiques(user.email, periode);
+        setStats(data);
       } catch (err) {
         setError('Erreur lors du chargement des statistiques');
       } finally {
         setLoading(false);
       }
     };
+
     fetchData();
-  }, []);
+  }, [periode]); 
 
-  // useMemo pour éviter les recalculs inutiles
-  const donneesAdherence    = useMemo(() => generateDonneesAdherence(medicaments),    [medicaments]);
-  const donneesTemporelles  = useMemo(() => generateDonneesTemporelles(medicaments),  [medicaments]);
-  const donneesRepartition  = useMemo(() => generateDonneesRepartition(medicaments),  [medicaments]);
-  const donneesMedicaments  = useMemo(() => generateDonneesMedicaments(medicaments),  [medicaments]);
-  const donneesHeures       = useMemo(() => generateDonneesHeures(medicaments),       [medicaments]);
-
-  const stats = useMemo(
-    () => calculateGlobalStats(donneesRepartition, donneesAdherence),
-    [donneesRepartition, donneesAdherence]
+  const chartJsAdherenceData = useMemo(
+    () => stats ? buildChartJsAdherenceData(stats.donneesAdherence) : null,
+    [stats]
+  );
+  const chartJsBarData = useMemo(
+    () => stats ? buildChartJsBarData(stats.donneesMedicaments) : null,
+    [stats]
+  );
+  const chartJsDoughnutData = useMemo(
+    () => stats ? buildChartJsDoughnutData(stats.donneesRepartition) : null,
+    [stats]
   );
 
-  const chartJsAdherenceData = useMemo(() => buildChartJsAdherenceData(donneesAdherence), [donneesAdherence]);
-  const chartJsBarData       = useMemo(() => buildChartJsBarData(donneesMedicaments),     [donneesMedicaments]);
-  const chartJsDoughnutData  = useMemo(() => buildChartJsDoughnutData(donneesRepartition),[donneesRepartition]);
-
   return {
-    loading, error, periode, setPeriode,
-    typeGraphique, setTypeGraphique,
-    donneesAdherence, donneesTemporelles,
-    donneesRepartition, donneesMedicaments, donneesHeures,
-    stats, chartJsAdherenceData, chartJsBarData, chartJsDoughnutData
+    stats, loading, error,
+  periode, setPeriode,
+  typeGraphique, setTypeGraphique,
+  donneesAdherence: stats?.donneesAdherence ?? [],
+  donneesTemporelles: stats?.donneesTemporelles ?? [],
+  donneesRepartition: stats?.donneesRepartition ?? [],
+  donneesMedicaments: stats?.donneesMedicaments ?? [],
+  chartJsAdherenceData,
+  chartJsBarData,
+  chartJsDoughnutData
   };
 };

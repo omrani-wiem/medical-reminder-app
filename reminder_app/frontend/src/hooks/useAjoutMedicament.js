@@ -1,6 +1,6 @@
 import {useState}  from 'react';
 import { useNavigate  } from 'react-router-dom';
-import { ajouterMedicament } from '../services/medicamentsService';
+import { ajouterMedicament } from '../services/medicamentService';
 
 const INITIAL_FORM = {
     nom: '', dosage: '', forme: 'Comprimé', couleur: '',
@@ -13,6 +13,7 @@ export const useAjouterMedicament =() =>{
     const [formData, setFormData] = useState(INITIAL_FORM);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
 
     const handleInputChange = (e) => {
